@@ -9,55 +9,44 @@
  */
 
 import React from 'react';
-import { StatusBar, Text } from 'react-native';
-import {
-  Button,
-  Container,
-  Content,
-  Footer,
-  FooterTab,
-  Header,
-  Icon,
-  Left,
-  Right,
-  Title,
-  Body,
-} from 'native-base';
-import WebView from 'react-native-webview';
+import { Database } from '@nozbe/watermelondb';
+import schema from './model/schema';
+import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
+import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
+import Book from './model/Book';
+import Chapter from './model/Chapter';
+import { BookParser } from './src/components/BookParser';
+import { Layout } from './src/pages/Layout';
+import { Root } from 'native-base';
+import { Downloads } from './src/components/Downloads';
+import { ActionSheetProvider } from './src/components/ActionSheet';
+import TrackPlayer from './lib/TrackPlayer/TrackPlayer';
 
-// import styled from 'styled-components/native';
+const adapter = new SQLiteAdapter({
+  schema,
+});
 
-declare var global: { HermesInternal: null | {} };
+const database = new Database({
+  adapter,
+  modelClasses: [Book, Chapter],
+  actionsEnabled: true,
+});
+
+TrackPlayer.getInstance();
 
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <WebView source={{ uri: 'https://google.com' }} />
-          {/*<Text>This is Content Section</Text>*/}
-        </Content>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    </>
+    <Root>
+      <DatabaseProvider database={database}>
+        <BookParser>
+          <Downloads>
+            <ActionSheetProvider>
+              <Layout />
+            </ActionSheetProvider>
+          </Downloads>
+        </BookParser>
+      </DatabaseProvider>
+    </Root>
   );
 };
 
