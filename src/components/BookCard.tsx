@@ -2,11 +2,11 @@ import React, {ReactNode, useCallback, useContext, useEffect, useMemo, useState}
 import Book from "../../model/Book";
 import {useObservable} from "rxjs-hooks";
 import {
-  AsyncStorage,
   ImageBackground,
   ImageSourcePropType,
   Platform,
 } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 import {ActionSheet, Button, H1, Icon, Image, Text, Thumbnail, Toast} from "native-base";
 import RNBackgroundDownloader, {DownloadTask} from 'react-native-background-downloader';
 import styled from "styled-components/native";
@@ -71,37 +71,14 @@ enum State {
   Destroying,
 }
 
-const ACTIVE_BOOK = 'active_book';
-
 export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
   const book = useObservable(() => _book.observe());
   const chapters = useObservable(() => _book.chapters.observe());
   const links = useMemo(() => [...new Set(chapters?.map(chapter => chapter.downloadURL))], [chapters]);
   const downloads = useDownloads();
   const {show: showActionSheet} = useActionSheet();
-  const playerState = usePlaybackState();
-
   const [progress, setProgress] = useState(0);
-
   const [state, setState] = useState(State.Loading);
-
-  useAsyncEffect(async () => {
-    console.log(playerState);
-    if (!book) { return; }
-    const activeBook = await AsyncStorage.getItem(ACTIVE_BOOK);
-    if (activeBook == book.id) {
-      let state: State = State.Ready;
-      switch (playerState) {
-        case RNTrackPlayer.STATE_PAUSED:
-          state = State.Paused; break;
-        case RNTrackPlayer.STATE_PLAYING:
-          state = State.Playing; break;
-        case RNTrackPlayer.STATE_STOPPED:
-          state = State.Ready; break;
-      }
-      setState(state);
-    }
-  }, [playerState]);
 
   useAsyncEffect(async () => {
     if (!book || !chapters || state == State.Downloading) {
@@ -260,29 +237,28 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
     if (!book || !chapters || state !== State.Ready) {
       return;
     }
-    try {
-      switch (Platform.OS) {
-        case "android": {
-          const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
-          await Playlist.clearPlaylist();
-          await Playlist.createPlaylistFrom({
-            items: files.map(file => ({
-              id: file.name,
-              data: {
-                id: file.name,
-                title: file.name,
-                artwork: '',
-                url: file.path,
-              }
-            }))
-          });
-          await Playlist.togglePlay();
-          break;
-        }
+    if (Platform.OS === "android") {
+      try {
+        const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
+        await Playlist.clearPlaylist();
+        await Playlist.createPlaylistFrom({
+          items: files.map(file => ({
+            id: book.id + file.name,
+            data: {
+              id: book.id + file.name,
+              title: book.title,
+              artwork: '',
+              url: file.path,
+            }
+          }))
+        });
+        await Playlist.togglePlay();
+      } catch (e) {
+        Toast.show({
+          text: e.message,
+          type: "danger",
+        })
       }
-      await AsyncStorage.setItem(ACTIVE_BOOK, book.id);
-    } finally {
-
     }
   };
 
