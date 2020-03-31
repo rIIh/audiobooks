@@ -1,0 +1,11 @@
+diff --git a/node_modules/react-native-feather1s/src/index.d.ts b/node_modules/react-native-feather1s/src/index.d.ts
+new file mode 100644
+index 0000000..e5ec5ba
+--- /dev/null
++++ b/node_modules/react-native-feather1s/src/index.d.ts
+@@ -0,0 +1,5 @@
++declare module 'react-native-feather1s' {
++  import {IconProps} from "react-native-vector-icons/Icon";
++  const Icon: React.FC<{thin?: boolean} & IconProps>;
++  export default Icon;
++}

@@ -13,4 +13,6 @@ export default class Chapter extends Model {
   @field('title') title!: string;
   @field('duration') duration!: number;
   @field('download_url') downloadURL!: string;
+  @field('complete') complete!: boolean;
+  @field('progress') progress!: number;
 }

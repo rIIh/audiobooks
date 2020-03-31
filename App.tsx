@@ -20,15 +20,10 @@ import { Layout } from './src/pages/Layout';
 import { Root } from 'native-base';
 import { Downloads } from './src/components/Downloads';
 import { ActionSheetProvider } from './src/components/ActionSheet';
-import TrackPlayer from './lib/TrackPlayer/TrackPlayer';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './lib/redux';
-import _ from 'lodash';
 import thunk from 'redux-thunk';
-import RNTrackPlayer from 'react-native-track-player';
-import { getState } from './lib/react-native-track-player';
-import { TrackPlayerActions } from './lib/redux/track-player/actions';
 import migrations from './model/migrations';
 
 const adapter = new SQLiteAdapter({
@@ -42,18 +37,7 @@ const database = new Database({
   actionsEnabled: true,
 });
 
-TrackPlayer.getInstance();
-
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-const updateState = _.debounce(
-  (state: RNTrackPlayer.State) => store.dispatch(TrackPlayerActions.setState(getState(state))),
-  30,
-);
-
-RNTrackPlayer.addEventListener('playback-state', ({ state }) => {
-  updateState(state);
-});
 
 const App = () => {
   return (

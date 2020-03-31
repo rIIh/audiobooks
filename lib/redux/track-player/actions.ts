@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 import Book from '../../../model/Book';
-import { PlayerState } from '../../react-native-track-player';
+import { PlayerState } from '../../track-player';
 
 export const TrackPlayerActions = {
   setActiveBook: createAction('PLAY_BOOK')<Book>(),

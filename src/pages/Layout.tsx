@@ -19,9 +19,8 @@ import Modal from 'react-native-modal';
 import { Dialog } from '../components/Dialog';
 import Chapter from "../../model/Chapter";
 import {BookCard} from "../components/BookCard";
-import {Player} from "../components/Player";
 import {hmsParse} from "../../lib/hmsParser";
-import {AnotherPlayer} from "../components/AnotherPlayer";
+import {Player} from "../components/Player";
 
 const BookView: React.FC<{ bookRef: Book }> = ({ bookRef }) => {
   const book = useObservable(() => bookRef.observe());
@@ -145,11 +144,6 @@ const CustomizedHeader = () => {
           <Icon name="ios-search" />
           <Input placeholder="Search Book" />
         </InputGroup>
-
-        <Button dark transparent onPress={clear}>
-          <Icon name="trash" />
-        </Button>
-
         <Button dark transparent onPress={() => setModal(true)}>
           <Icon name="add" />
         </Button>
@@ -175,6 +169,6 @@ export const Layout: React.FC = () => {
         }
       </Content>
     </Container>
-    <AnotherPlayer/>
+    <Player/>
   </>
 };
