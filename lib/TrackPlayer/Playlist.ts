@@ -88,14 +88,7 @@ class PlaylistController extends Container<PlaylistState> {
   };
 
   togglePlay = async () => {
-    const trackPlayer = TrackPlayer.getInstance();
-    const isPlaying = await trackPlayer.isPlaying();
-
-    if (isPlaying) {
-      await trackPlayer.togglePlay();
-    } else {
-      await trackPlayer.togglePlay();
-    }
+    await TrackPlayer.getInstance().togglePlay();
   };
 
   pause = () => TrackPlayer.getInstance().pause();
@@ -103,6 +96,10 @@ class PlaylistController extends Container<PlaylistState> {
   next = () => TrackPlayer.getInstance().next();
 
   previous = () => TrackPlayer.getInstance().previous();
+
+  seekTo = async (position: number) => {
+    await TrackPlayer.getInstance().seekTo(position);
+  };
 
   addToPlaylist = async (...items: PlaylistItem[]) => {
     await this.setState(({ playlist }) => ({

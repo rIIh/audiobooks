@@ -3,7 +3,7 @@ import Book from './Book';
 import Chapter from './Chapter';
 
 export default appSchema({
-  version: 1,
+  version: 2,
   tables: [
     tableSchema({
       name: Book.table,
@@ -19,6 +19,7 @@ export default appSchema({
         { name: 'index', type: 'number' },
         { name: 'book_id', type: 'string' },
         { name: 'title', type: 'string' },
+        { name: 'duration', type: 'number' },
         { name: 'download_url', type: 'string' },
       ],
     }),

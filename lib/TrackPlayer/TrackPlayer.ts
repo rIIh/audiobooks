@@ -65,6 +65,10 @@ class TrackPlayer {
     return currentState === RNTrackPlayer.STATE_PLAYING;
   };
 
+  seekTo = async (position: number) => {
+    await RNTrackPlayer.seekTo(position);
+  };
+
   togglePlay = async () => {
     const isPlaying = await this.isPlaying();
 
@@ -84,7 +88,7 @@ class TrackPlayer {
       : this.createTrack(playables);
 
     const currentTrackId = await this.getCurrentTrackId();
-    RNTrackPlayer.add(audioFiles, currentTrackId);
+    await RNTrackPlayer.add(audioFiles, currentTrackId);
   };
 
   // add after the current playing item

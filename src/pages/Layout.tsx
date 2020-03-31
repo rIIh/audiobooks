@@ -20,7 +20,7 @@ import { Dialog } from '../components/Dialog';
 import Chapter from "../../model/Chapter";
 import {BookCard} from "../components/BookCard";
 import {Player} from "../components/Player";
-import {ActionSheet} from "../components/ActionSheet";
+import {hmsParse} from "../../lib/hmsParser";
 
 const BookView: React.FC<{ bookRef: Book }> = ({ bookRef }) => {
   const book = useObservable(() => bookRef.observe());
@@ -43,12 +43,14 @@ const URLDialog: React.FC<{ show: boolean; confirm?: (url: string) => void; dism
   const [input, setInput] = useState('');
   const [inClipboard] = useClipboard();
   const ref = useRef<TextInput>(null);
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (show) {
-      ref.current?.focus();
       if (URLConstraints.regex.test(inClipboard) && input == '') {
         setInput(inClipboard);
       }
+      if (input == '') { ref.current?.focus(); }
+    } else {
+      setInput('');
     }
   }, [show]);
 
@@ -118,6 +120,7 @@ const CustomizedHeader = () => {
           record.book.set(book);
           record.title = chapter.title;
           record.downloadURL = chapter.downloadURL;
+          record.duration = hmsParse(chapter.duration);
         })
       })
     })

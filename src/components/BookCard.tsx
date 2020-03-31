@@ -1,13 +1,8 @@
-import React, {ReactNode, useCallback, useContext, useEffect, useMemo, useState} from "react";
+import React, {ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import Book from "../../model/Book";
 import {useObservable} from "rxjs-hooks";
-import {
-  ImageBackground,
-  ImageSourcePropType,
-  Platform,
-} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage';
-import {ActionSheet, Button, H1, Icon, Image, Text, Thumbnail, Toast} from "native-base";
+import {ImageBackground, ImageSourcePropType, Platform,} from "react-native";
+import {Button, Icon, Thumbnail, Toast, View} from "native-base";
 import RNBackgroundDownloader, {DownloadTask} from 'react-native-background-downloader';
 import styled from "styled-components/native";
 import * as Progress from 'react-native-progress';
@@ -16,10 +11,12 @@ import RNFS from 'react-native-fs';
 import useAsyncEffect from "use-async-effect";
 import {useDownloads} from "./Downloads";
 import {useActionSheet} from "./ActionSheet";
-import RNTrackPlayer, {usePlaybackState} from 'react-native-track-player'
-import TrackPlayer from "../../lib/TrackPlayer/TrackPlayer";
-import Playlist from "../../lib/TrackPlayer/Playlist";
 import {CircleButton} from "./CircleButton";
+import {PlaybackButton} from "./controls/PlaybackButton";
+import {useAsyncMemo} from "../../lib/hooks";
+import prettyBytes from "pretty-bytes";
+import {useDatabase} from "@nozbe/watermelondb/hooks";
+import {prettyTime} from "../../lib/hmsParser";
 
 const Container = styled.View`
   margin: 24px;
@@ -28,18 +25,19 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const Thumb: React.FC<{ source: ImageSourcePropType }> = (props) => <ImageBackground
+export const Thumb: React.FC<{ source: ImageSourcePropType, height?: number | string }> = ({ height, ...props }) => <ImageBackground
   source={{uri: 'https://via.placeholder.com/150'}}
   {...props}
   blurRadius={2}
-  borderRadius={8}
   style={{
     aspectRatio: 9 / 14,
-    flexDirection: 'row',
     alignItems: 'center',
+    height: height ?? 100,
+    overflow: 'hidden',
+    borderRadius: 8,
     justifyContent: 'center'
   }}>
-  <Thumbnail source={{uri: 'https://via.placeholder.com/150'}} {...props} square style={{flex: 0}}/>
+  <Thumbnail source={{uri: 'https://via.placeholder.com/150'}} {...props} resizeMode="contain" square style={{ width: '100%', height: '100%', overflow: 'hidden' }}/>
 </ImageBackground>;
 
 const Meta = styled.View`
@@ -74,14 +72,29 @@ enum State {
 export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
   const book = useObservable(() => _book.observe());
   const chapters = useObservable(() => _book.chapters.observe());
+  const database = useDatabase();
   const links = useMemo(() => [...new Set(chapters?.map(chapter => chapter.downloadURL))], [chapters]);
   const downloads = useDownloads();
   const {show: showActionSheet} = useActionSheet();
   const [progress, setProgress] = useState(0);
-  const [state, setState] = useState(State.Loading);
+  const [state, setState] = useState<State>(State.Loading);
+  const size = useAsyncMemo(async () => {
+    if (!book) { return null; }
+    try {
+      if (Platform.OS == "android") {
+        const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
+        return prettyBytes(files.map(file => parseInt(file.size)).reduce((acc, val) => acc + val));
+      }
+    } catch (e) {
+      // Toast.show({
+      //   text: 'Failed to get size of book',
+      //   type: "danger",
+      // })
+    }
+  }, [links], 'Calculating size');
 
   useAsyncEffect(async () => {
-    if (!book || !chapters || state == State.Downloading) {
+    if (!book) {
       return;
     }
     if (Platform.OS == "android") {
@@ -96,9 +109,10 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
         }
       } catch (e) {
         console.warn(e);
+        setState(State.NoCache);
       }
     }
-  }, [book, chapters, state, downloads.pending]);
+  }, [book, chapters]);
 
   useAsyncEffect(async () => {
     if (!book || !chapters || state == State.Downloading) {
@@ -130,6 +144,17 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
       setState(State.Ready);
     }
   }, [book, chapters, downloads.pending]);
+
+  const destroy = async () => {
+    await clearCache();
+    setState(State.Destroying);
+    database.action(async () => {
+      await asyncForEach(chapters ?? [], async chapter => {
+        await chapter.destroyPermanently();
+      });
+      await book?.destroyPermanently();
+    });
+  };
 
   const clearCache = async () => {
     if (!book || !chapters) {
@@ -196,7 +221,15 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
                 setProgress((index + value) / links.length);
               })
               .done(resolve)
-              .error(reject)
+              .error((error, errorCode) => {
+                if (Platform.OS == "android") {
+                  RNFS.unlink(`${RNBackgroundDownloader.directories.documents}/${book.id}/${index}${extension}`).then(() => {
+                    reject({error, errorCode});
+                  }).catch((unlinkFailed) => {
+                    reject({error, errorCode, unlinkFailed});
+                  });
+                }
+              })
               .begin(() => Toast.show({
                 text: `Download started: ${task.id}`,
               }))
@@ -223,9 +256,8 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
           }
         }
       } catch (e) {
-        console.warn(e);
         Toast.show({
-          text: e,
+          text: JSON.stringify(e),
           type: "danger",
         });
       }
@@ -233,62 +265,43 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
     setState(State.Ready);
   }, [book, chapters, progress]);
 
-  const play = async () => {
-    if (!book || !chapters || state !== State.Ready) {
-      return;
+  const Control = ((state) => {
+    switch (state) {
+      case State.NoCache:
+        return <CircleButton onPress={download}>
+          <Icon type="FontAwesome5" name="arrow-down" style={{fontSize: 12}}/>
+        </CircleButton>;
+      case State.Loading:
+        return <Progress.Circle size={40} progress={progress} indeterminate={false}/>;
+      case State.DeletingCache:
+        return <Progress.Circle size={40} indeterminate color="red">
+          <Icon type="FontAwesome5" name="trash" style={{fontSize: 12}}/>
+        </Progress.Circle>;
+      case State.Destroying:
+        return <Progress.Circle size={40} indeterminate color="red">
+          <Icon type="FontAwesome5" name="close" style={{fontSize: 12}}/>
+        </Progress.Circle>;
+      case State.Downloading:
+        return <Progress.Circle size={40} progress={progress} indeterminate={progress == 0}/>
+      case State.Paused:
+      case State.Playing:
+      case State.Ready:
+        return book && <PlaybackButton book={book}/>
     }
-    if (Platform.OS === "android") {
-      try {
-        const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
-        await Playlist.clearPlaylist();
-        await Playlist.createPlaylistFrom({
-          items: files.map(file => ({
-            id: book.id + file.name,
-            data: {
-              id: book.id + file.name,
-              title: book.title,
-              artwork: '',
-              url: file.path,
-            }
-          }))
-        });
-        await Playlist.togglePlay();
-      } catch (e) {
-        Toast.show({
-          text: e.message,
-          type: "danger",
-        })
-      }
-    }
-  };
+  })(state);
 
-  let PlayButton: ReactNode = <Progress.Circle size={40} indeterminate={true}/>;
-
-  if (state == State.NoCache) {
-    PlayButton = <CircleButton onPress={download}>
-      <Icon type="FontAwesome5" name="arrow-down" style={{fontSize: 12}}/>
-    </CircleButton>;
-  } else if (state == State.Downloading) {
-    PlayButton = <Progress.Circle size={40} progress={progress} indeterminate={false}/>
-  } else if (state == State.Ready) {
-    PlayButton = <CircleButton onPress={play}>
-      <Icon type="FontAwesome5" name="play" style={{fontSize: 12}}/>
-    </CircleButton>;
-  } else if (state == State.DeletingCache) {
-    PlayButton = <Progress.Circle size={40} indeterminate color="red">
-      <Icon type="FontAwesome5" name="trash" style={{fontSize: 12}}/>
-    </Progress.Circle>
-  }
+  const time = (chapters?.length ?? 0) > 0 && (chapters?.map(chapter => chapter.duration).reduce((acc, val) => acc + val ?? 0) ?? 0) || 0;
 
   return <Container>
     <Thumb source={{uri: book?.thumbnail}}/>
     <Meta>
       <Title>{book?.title ?? 'undefined'}</Title>
       <Subtitle>{book?.author}</Subtitle>
-      <Subtitle>{chapters?.length}</Subtitle>
+      <Subtitle>{size}</Subtitle>
+      <Subtitle>{prettyTime(time)} | {chapters?.length} chapters</Subtitle>
     </Meta>
     <Right style={{flexDirection: 'row',}}>
-      {PlayButton}
+      {Control}
       <Button dark transparent iconLeft onPress={() => {
         showActionSheet({
           actions: [
@@ -302,7 +315,7 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
             {
               text: 'Delete',
               icon: 'delete',
-              callback: () => console.log('Deleted'),
+              callback: destroy,
             },
             {
               text: 'Clear Cache',
@@ -310,7 +323,6 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
               callback: clearCache,
             },
           ],
-
         });
       }} style={{
         justifyContent: 'center', alignItems: 'center', height: 40,

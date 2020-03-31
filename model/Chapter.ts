@@ -11,5 +11,6 @@ export default class Chapter extends Model {
   @relation(Book.table, 'book_id') book!: Relation<Book>;
   @field('index') index!: number;
   @field('title') title!: string;
+  @field('duration') duration!: number;
   @field('download_url') downloadURL!: string;
 }

@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useState } from 'react';
 import WebView from 'react-native-webview';
-import { Stack, Map } from 'immutable';
+import { Map } from 'immutable';
 import { noop } from '../../lib/noop';
 import Chapter from '../../model/Chapter';
-import Book from "../../model/Book";
+import Book from '../../model/Book';
 
 interface IBookParser {
   parseBook: (url: string) => Promise<BookObject>;
@@ -21,9 +21,8 @@ interface Response<T> {
   data?: T;
 }
 
-export interface BookObject
-  extends Pick<Book, 'title' | 'author' | 'thumbnail'> {
-  chapters: Pick<Chapter, 'title' | 'downloadURL'>[];
+export interface BookObject extends Pick<Book, 'title' | 'author' | 'thumbnail'> {
+  chapters: (Pick<Chapter, 'title' | 'downloadURL'> & { duration: string })[];
 }
 
 export const URLConstraints = {
@@ -31,20 +30,13 @@ export const URLConstraints = {
   zones: ['org'],
   prefix: '.*',
   get regex() {
-    return new RegExp(
-      `https:\\/\\/${this.prefix}(${this.domains.join(
-        '|',
-      )})\\.(${this.zones.join('|')})\\/.*`,
-    );
+    return new RegExp(`https:\\/\\/${this.prefix}(${this.domains.join('|')})\\.(${this.zones.join('|')})\\/.*`);
   },
 };
 
 export const BookParser: React.FC = ({ children }) => {
   const [resolvers, setResolvers] = useState<
-    Map<
-      string,
-      { resolve: (book: BookObject) => void; reject: (error: Error) => void }
-    >
+    Map<string, { resolve: (book: BookObject) => void; reject: (error: Error) => void }>
   >(Map());
   const parseBook = useCallback(
     (url: string) => {
@@ -85,14 +77,8 @@ export const BookParser: React.FC = ({ children }) => {
           }}
           injectedJavaScript={js}
           onMessage={event => {
-            const response = JSON.parse(event.nativeEvent.data) as Response<
-              BookObject
-            >;
-            bookReady(
-              key,
-              response.data,
-              response.message ? new Error(response.message) : undefined,
-            );
+            const response = JSON.parse(event.nativeEvent.data) as Response<BookObject>;
+            bookReady(key, response.data, response.message ? new Error(response.message) : undefined);
           }}
         />
       ))}
@@ -133,7 +119,8 @@ const js = `
       // item.dispatchEvent(click);
 
       const audio = document.getElementsByClassName('plyr')[0].getElementsByTagName('audio')[0]; // в этом элементе есть название трека и url для загрузки
-      chapters.push({ title, downloadURL: JSON.stringify(audio.src) });
+      const duration = item.getElementsByClassName('chapter__default--time')[0].lastChild.data;
+      chapters.push({ title, downloadURL: JSON.stringify(audio.src), duration });
     }
     
     const thumbnail = document.querySelector('.cover__wrapper--image > img').src;

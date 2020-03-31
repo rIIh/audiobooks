@@ -77,7 +77,7 @@ const Body: React.FC<{ options: Options, dismiss: () => void }> = ({options, dis
                                                             onPress={() => {
                                                               console.log('Destructive action');
                                                               Alert.alert(
-                                                                'asd',
+                                                                '',
                                                                 action.alertText ?? 'Are you sure?',
                                                                 [{
                                                                   text: 'No',

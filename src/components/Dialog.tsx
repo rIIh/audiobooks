@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {PixelRatio} from 'react-native';
+import { PixelRatio } from 'react-native';
 
 export class Dialog {
   static Container = styled.View`
