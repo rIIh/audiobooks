@@ -1,4 +1,4 @@
-import { addColumns, schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
+import { addColumns, schemaMigrations,  } from '@nozbe/watermelondb/Schema/migrations';
 import Chapter from './Chapter';
 
 export default schemaMigrations({
@@ -13,6 +13,6 @@ export default schemaMigrations({
           columns: [{ name: 'duration', type: 'number' }],
         }),
       ],
-    },
+    }
   ],
 });

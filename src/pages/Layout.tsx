@@ -21,6 +21,7 @@ import Chapter from "../../model/Chapter";
 import {BookCard} from "../components/BookCard";
 import {Player} from "../components/Player";
 import {hmsParse} from "../../lib/hmsParser";
+import {AnotherPlayer} from "../components/AnotherPlayer";
 
 const BookView: React.FC<{ bookRef: Book }> = ({ bookRef }) => {
   const book = useObservable(() => bookRef.observe());
@@ -174,6 +175,6 @@ export const Layout: React.FC = () => {
         }
       </Content>
     </Container>
-    <Player/>
+    <AnotherPlayer/>
   </>
 };

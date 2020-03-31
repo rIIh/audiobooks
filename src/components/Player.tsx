@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import {H3, Icon, Separator, Subtitle, Text, View,} from 'native-base';
+import {H3, Icon, Separator, Text, View,} from 'native-base';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
-import {Dimensions, StatusBar, ViewStyle} from "react-native";
+import {Dimensions, Platform, StatusBar, ViewStyle} from "react-native";
 import Slider from '@react-native-community/slider';
 import {CircleButton} from "./CircleButton";
 import {TrackPlayerThunks} from "../../lib/redux/track-player/thunks";
@@ -13,11 +13,15 @@ import {PlayerState} from "../../lib/react-native-track-player";
 import {Thumb} from "./BookCard";
 import {BorderlessButton} from "react-native-gesture-handler";
 import Chapter from "../../model/Chapter";
-import RNTrackPlayer, {useTrackPlayerEvents, useTrackPlayerProgress} from "react-native-track-player";
+import RNTrackPlayer from "react-native-track-player";
 import useAsyncEffect from "use-async-effect";
 import TrackPlayer from "../../lib/TrackPlayer/TrackPlayer";
 import {prettyTime} from "../../lib/hmsParser";
 import Playlist from "../../lib/TrackPlayer/Playlist";
+import {useAsyncMemo} from "../../lib/hooks";
+import Video from 'react-native-video';
+import RNFS from 'react-native-fs';
+import RNBackgroundDownloader from "react-native-background-downloader";
 
 const SNAP_POINTS = [Math.ceil(Dimensions.get('screen').height - (StatusBar.currentHeight ?? 0)), 96];
 
@@ -43,10 +47,10 @@ const BodyView = styled(Container)`
 `;
 
 const Progress: React.FC<{ containerStyle?: ViewStyle, progressStyle?: ViewStyle, progress: number, position?: number, duration?: number, onProgressChanged?: (newValue: number) => void }> = ({
-                                                                                                                                                                                                containerStyle,
-                                                                                                                                                                                                onProgressChanged,
-                                                                                                                                                                                                progressStyle, progress, duration, position
-                                                                                                                                                                                              }) => {
+                                                                                                                                                                                                 containerStyle,
+                                                                                                                                                                                                 onProgressChanged,
+                                                                                                                                                                                                 progressStyle, progress, duration, position
+                                                                                                                                                                                               }) => {
   const [localProgress, setProgress] = useState(progress);
   const [dragging, setDragging] = useState(false);
   useEffect(() => {
@@ -60,59 +64,65 @@ const Progress: React.FC<{ containerStyle?: ViewStyle, progressStyle?: ViewStyle
   }, []);
 
   const onSeek = useCallback(() => {
-    onProgressChanged?.(localProgress);
     setDragging(false);
   }, []);
 
   return <>
     {position != undefined && duration != undefined &&
     <View style={{flexDirection: 'row', justifyContent: 'space-between', width: containerStyle?.width}}>
-        <Text>{prettyTime(position, true)}</Text>
-        <Text>{prettyTime(duration, true)}</Text>
+        <Text>{prettyTime(position, [false, true, true])}</Text>
+        <Text>{prettyTime(duration, [false, true, true])}</Text>
     </View>}
-    <Slider
-      maximumValue={1}
-      minimumValue={0}
-      onSlidingStart={onSlidingStart}
-      onValueChange={setProgress}
-      onSlidingComplete={onSeek}
-      value={localProgress}
-      minimumTrackTintColor={'#222'}
-      maximumTrackTintColor={'#555'}
-      style={containerStyle}
-    />
-    {/*<View style={{ height: 4, flexDirection: 'row', ...containerStyle }}>*/}
-    {/*  <View style={{ flex: progress, backgroundColor: 'green', ...progressStyle }}/>*/}
-    {/*</View>*/}
+
+    <View style={{height: 4, flexDirection: 'row', ...containerStyle}}>
+      <Slider
+        maximumValue={1}
+        minimumValue={0}
+        onSlidingStart={onSlidingStart}
+        onValueChange={setProgress}
+        onSlidingComplete={newValue => {
+          onProgressChanged?.(localProgress);
+          setDragging(false);
+        }}
+        value={localProgress}
+        minimumTrackTintColor={'#222'}
+        maximumTrackTintColor={'#555'}
+        style={containerStyle}
+      />
+      <View style={{flex: progress, backgroundColor: 'green', ...progressStyle}}/>
+    </View>
   </>
 };
 
-const Header: React.FC<{ fall: Animated.Value<number> }> = ({fall}) => {
+const Header: React.FC<{ fall: Animated.Value<number>, progress: number, position: number, duration: number, show: boolean }> = ({fall, duration, progress, position, show}) => {
   const dispatch = useDispatch();
   const dropBook = useCallback(() => dispatch(TrackPlayerThunks.dropBook()), [dispatch]);
   const toggle = useCallback(() => dispatch(TrackPlayerThunks.toggle()), [dispatch]);
-  const {position, duration} = useTrackPlayerProgress(200);
   const {playbackState, activeBook, waitingForBook} = useTypedSelector(state => state.trackPlayer);
 
   return (
     <HeaderView>
-      <Animated.View style={{opacity: fall}}>
-        <Text>{activeBook?.title}</Text>
-        <Text>{activeBook?.author}</Text>
-      </Animated.View>
-      <Animated.View style={{flexDirection: 'row', opacity: fall}}>
-        {activeBook && <CircleButton onPress={dropBook}>
-            <Icon type="FontAwesome5" name="stop" style={{fontSize: 12}}/>
-        </CircleButton>}
-        {activeBook && <CircleButton onPress={toggle}>
-            <Icon type="FontAwesome5"
-                  name={playbackState == PlayerState.Playing ? 'pause' : playbackState == PlayerState.Paused ? 'play' : 'stop'}
-                  style={{fontSize: 12}}/>
-        </CircleButton>}
-      </Animated.View>
-      <Animated.View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
-        <Progress progress={duration == 0 ? 0 : position / duration}/>
-      </Animated.View>
+      {
+        show && <>
+            <Animated.View style={{opacity: fall}}>
+                <Text>{activeBook?.title}</Text>
+                <Text>{activeBook?.author} / {prettyTime(position, [false, true, true])} - {prettyTime(duration, [false, true, true])}</Text>
+            </Animated.View>
+            <Animated.View style={{flexDirection: 'row', opacity: fall}}>
+              {activeBook && <CircleButton onPress={dropBook}>
+                  <Icon type="FontAwesome5" name="stop" style={{fontSize: 12}}/>
+              </CircleButton>}
+              {activeBook && <CircleButton onPress={toggle}>
+                  <Icon type="FontAwesome5"
+                        name={playbackState == PlayerState.Playing ? 'pause' : playbackState == PlayerState.Paused ? 'play' : 'stop'}
+                        style={{fontSize: 12}}/>
+              </CircleButton>}
+            </Animated.View>
+            <Animated.View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+                <Progress progress={progress}/>
+            </Animated.View>
+        </>
+      }
     </HeaderView>
   );
 };
@@ -123,13 +133,23 @@ export const Player: React.FC = () => {
   const dispatch = useDispatch();
   const toggle = useCallback(() => dispatch(TrackPlayerThunks.toggle()), [dispatch]);
   const [chapters, setChapters] = useState<Chapter[]>();
+  const files = useAsyncMemo(async () => {
+    if (Platform.OS == "android") {
+      try {
+        return await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${activeBook?.id}`);
+      }
+      catch (e) {}
+      return [];
+    } else {
+      return [];
+    }
+  }, [activeBook], []);
   useEffect(() => {
     const subscribed = activeBook?.chapters.observe().subscribe(setChapters);
     return () => {
       try {
         subscribed?.unsubscribe();
-      }
-      catch (e) {
+      } catch (e) {
         console.log(e);
       }
     };
@@ -153,16 +173,18 @@ export const Player: React.FC = () => {
     }
   }, [chapters]);
   const durations = map?.map(_chapters => _chapters.map(chapter => chapter.duration).reduce((acc, val) => acc + val));
+  // console.log(durations);
   const [track, setTrack] = useState<string | null>(null);
   const fileIndex = useMemo(() => parseInt(track?.replace(activeBook?.id ?? '', '') ?? ''), [track, activeBook]);
 
   useAsyncEffect(async () => {
     setTrack(await TrackPlayer.getInstance().getCurrentTrackId());
   }, []);
-  useTrackPlayerEvents(['playback-track-changed'], data => {
+  RNTrackPlayer.useTrackPlayerEvents(['playback-track-changed'], data => {
     setTrack(data.nextTrack);
   });
-  const {position, duration} = useTrackPlayerProgress(200);
+  const {position, bufferedPosition, duration} = RNTrackPlayer.useTrackPlayerProgress(200);
+
   const progress = useMemo(() => {
     const index = parseInt(track?.replace(activeBook?.id ?? '', '') ?? '');
     if (isNaN(index)) {
@@ -178,36 +200,63 @@ export const Player: React.FC = () => {
     }
   }, [position, durations, duration, track, activeBook]);
 
-  const currentChapter = useMemo(() => {
-    if (!map) {
-      return null;
+  const [currentChapter, chapterPosition] = useMemo(() => {
+    if (!map || !chapters || !activeBook) {
+      return [null, null];
     }
-    const index = parseInt(track?.replace(activeBook?.id ?? '', '') ?? '');
-    const lastDurations = durations?.splice(index);
-    const last = (lastDurations?.length ?? 0) > 0 ? lastDurations?.reduce((acc, val) => acc + val) ?? 0 : 0;
-    if (last == 0) return null;
-    for (let chapter of map[index]) {
-      console.log(position, chapter.duration - last);
-      return chapter;
+    const fileIndex = parseInt(track?.replace(activeBook?.id ?? '', '') ?? '');
+    // const pausesBefore = chapters.findIndex(_chapter => _chapter.id == map[fileIndex][0].id) * pauseDuration;
+    let left = position; // - pausesBefore - pauseDuration;
+    let chapterIndex = 0;
+    for (let chapter of map[fileIndex]) {
+      const chapterDuration = chapter.duration;
+      if (left > chapterDuration) {
+        left -= chapterDuration;// + pauseDuration;
+        chapterIndex++;
+      } else {
+        if (chapterIndex == 0) {
+          return [chapter, position];
+        }
+        return [chapter, position - map[fileIndex].slice(0, chapterIndex).map(chapter => chapter.duration).reduce((acc, val) => acc + val)];
+      }
     }
-    return null;
+    return [null, null];
   }, [position, track]);
 
   const renderHeader = () => {
-    return <Header fall={fall.current}/>;
+    return <Header fall={fall.current}
+                   show={activeBook != null}
+                   progress={currentChapter && chapterPosition ? chapterPosition / currentChapter.duration : progress}
+                   position={chapterPosition ?? position} duration={currentChapter?.duration ?? duration}/>;
   };
 
   const Body = () => {
     return (
       <BodyView>
+        { activeBook != null && files.length > 0 && <Video audioOnly
+                                                           paused={playbackState == PlayerState.Paused}
+                                                           source={{
+          uri: files[fileIndex]?.path ?? '',
+        }}/>}
         <Thumb height={Dimensions.get("window").height * 0.4} source={{uri: activeBook?.thumbnail}}/>
         <Separator style={{backgroundColor: 'transparent'}}/>
         <H3>{activeBook?.title}</H3>
         <Text>{activeBook?.author}</Text>
         <Text>{currentChapter?.title ?? (map != null && map[fileIndex] != null ? `${map[fileIndex][0].title} - ${map[fileIndex][map[fileIndex].length - 1].title}` : 'undefined')}</Text>
         <Separator style={{backgroundColor: 'transparent'}}/>
-        <Progress progress={progress} position={position} duration={duration}
-                  onProgressChanged={newValue => console.log(newValue, duration * newValue) }
+        <Text
+          style={{alignSelf: 'flex-start'}}>{prettyTime(position, [true, true, true])} - {position} - {currentChapter?.duration}</Text>
+        <Text style={{alignSelf: 'flex-start'}}>{position} | {duration}</Text>
+        <Progress progress={currentChapter && chapterPosition ? chapterPosition / currentChapter.duration : progress}
+                  position={chapterPosition ?? position} duration={currentChapter?.duration ?? duration}
+                  onProgressChanged={newValue => {
+                    if (!chapterPosition || !currentChapter) {
+                      return;
+                    }
+                    const newPosition = position - chapterPosition + currentChapter.duration * newValue;
+                    console.log(newValue, newPosition);
+                    Playlist.seekTo(newPosition)
+                  }}
                   containerStyle={{width: '100%', backgroundColor: '#eee'}}
                   progressStyle={{backgroundColor: '#70a5ff'}}/>
         <Separator style={{backgroundColor: 'transparent'}}/>
@@ -230,7 +279,9 @@ export const Player: React.FC = () => {
             <Text>+30s</Text>
           </BorderlessButton>
           <BorderlessButton style={{height: 36, width: 36, alignItems: 'center', justifyContent: 'center'}}
-                            onPress={Playlist.next}>
+                            onPress={() => {
+                              chapterPosition && currentChapter ? Playlist.seekTo(position - chapterPosition + currentChapter.duration) : Playlist.next()
+                            }}>
             <Icon type="FontAwesome5" name="step-forward" style={{fontSize: 18}}/>
           </BorderlessButton>
         </View>

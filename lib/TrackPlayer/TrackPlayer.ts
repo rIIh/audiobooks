@@ -23,6 +23,8 @@ class TrackPlayer {
     // set up the player so we can use it
     RNTrackPlayer.setupPlayer({
       iosCategoryMode: 'spokenAudio',
+      // playBuffer: 20 * 60,
+      // maxBuffer: 100 * 60,
     });
 
     // add support for capabilities
@@ -33,7 +35,7 @@ class TrackPlayer {
     ];
 
     // list of options for the player
-    const options = {
+    const options: RNTrackPlayer.MetadataOptions = {
       stopWithApp: true,
       // An array of media controls capabilities
       capabilities,
@@ -46,15 +48,15 @@ class TrackPlayer {
   }
 
   private createTrack = (item: PlayableItem): Track => {
-    const { url, title, id, artwork } = item;
+    const { url, title, id, artwork, duration } = item;
     return {
       id,
       url,
       title,
       artist: 'AudioBooks',
       artwork,
+      duration,
       // here we use the voice algorithm, as it improves the quality of speech audio
-      pitchAlgorithm: RNTrackPlayer.PITCH_ALGORITHM_VOICE,
     };
   };
 
@@ -114,6 +116,7 @@ class TrackPlayer {
 export interface PlayableItem {
   url: string;
   title: string;
+  duration?: number;
   id: string;
   artwork: string;
 }

@@ -11,7 +11,7 @@ export function hmsParse(str: string) {
   return s;
 }
 
-export const prettyTime = function (fromSeconds: number, explicit: boolean = false): string {
+export const prettyTime = function (fromSeconds: number, hms: [boolean, boolean, boolean] = [false, false, false]): string {
   let hours   = Math.floor(fromSeconds / 3600);
   let minutes = Math.floor((fromSeconds - (hours * 3600)) / 60);
   let seconds = Math.round(fromSeconds - (hours * 3600) - (minutes * 60));
@@ -23,10 +23,15 @@ export const prettyTime = function (fromSeconds: number, explicit: boolean = fal
   if (minutes < 10) { resultMinutes = `0${minutes}`; }
   if (seconds < 10) { resultSeconds = `0${seconds}`; }
   let stop = false;
+  let index = 0;
   return [resultHours, resultMinutes, resultSeconds].filter(val => {
-    if (explicit) return true;
+    if (hms[index]) {
+      stop = true;
+      return true;
+    }
+    index++;
     if (!stop && val != '00') { stop = true }
     // return true;
     return stop || val != '00';
   }).join(':');
-}
+};
