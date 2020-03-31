@@ -86,10 +86,6 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
         return prettyBytes(files.map(file => parseInt(file.size)).reduce((acc, val) => acc + val));
       }
     } catch (e) {
-      // Toast.show({
-      //   text: 'Failed to get size of book',
-      //   type: "danger",
-      // })
     }
   }, [links], 'Calculating size');
 
@@ -328,7 +324,7 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
         justifyContent: 'center', alignItems: 'center', height: 40,
         width: 40
       }}>
-        <Icon type="FontAwesome5" name="ellipsis-v" style={{fontSize: 12}}/>
+        <Icon type="Entypo" name="dots-two-vertical" style={{fontSize: 18}}/>
       </Button>
     </Right>
   </Container>;

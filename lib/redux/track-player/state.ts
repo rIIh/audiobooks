@@ -1,5 +1,5 @@
 import Book from '../../../model/Book';
-import { PlayerState } from '../../react-native-track-player';
+import { PlayerState } from '../../track-player';
 
 export interface TrackPlayerState {
   waitingForBook: boolean;

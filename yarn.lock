@@ -1174,6 +1174,14 @@
     "@types/react-native" "*"
     react-native-modal ">=9.0.0"
 
+"@types/react-native-vector-icons@^6.4.5":
+  version "6.4.5"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.5.tgz#74cbfc564bd8435e43ad6728572a0e5b49c335d1"
+  integrity sha512-JBpcjWQE4n0GlE0p6HpDDclT+uXpFC453T5k4h+B38q0utlGJhvgNr8899BoJGc1xOktA2cgqFKmFMJd0h7YaA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/react-native-video@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-video/-/react-native-video-5.0.1.tgz#605b3e3170b2a91c514e828b486030ff426e2e9c"
@@ -6074,6 +6082,13 @@ react-native-extra-dimensions-android@^1.2.5:
   resolved "https://registry.yarnpkg.com/react-native-extra-dimensions-android/-/react-native-extra-dimensions-android-1.2.5.tgz#8ade91029aaac7519bf305116d39019e618a60f0"
   integrity sha512-eorFo9X1vEqAWUkgcZ300yKBG1wtgNeE7tdWAH2CE+P50FGTniJg5Sr6l1iPWG8ZskQOuF+KeiSTFlDa4vLfMw==
 
+react-native-feather1s@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-feather1s/-/react-native-feather1s-0.2.2.tgz#4c4b79c6d63fef0040c3291f108bcabca09956ac"
+  integrity sha512-pXkS7acoPvopFX9eH5h5GK23O5Un4lHhijbAj2XVFpAU8TWwhn5dI4pBv9RobLaNV5qFZ1XtLXAdrKy3BNb4KQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-fs@^2.16.6:
   version "2.16.6"
   resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.16.6.tgz#2901789a43210a35a0ef0a098019bbef3af395fd"
@@ -6175,11 +6190,6 @@ react-native-swift@^1.2.2:
   dependencies:
     "@raydeck/xcode" "^2.2.0"
     glob "^7.1.2"
-
-react-native-track-player@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-1.2.2.tgz#97e6d956ac2de70ed24b2665799d48075750b1e9"
-  integrity sha512-+Fv+dF4D8TRkq9kQ9sWKfqYmmvjkKaA4wGG+PRQO3aHRHnaswZG5o9TFbbY7xaLWNTxmmcSMR0YNcMm/Of91xQ==
 
 react-native-vector-icons@^6.6.0:
   version "6.6.0"

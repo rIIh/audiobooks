@@ -1,31 +1,55 @@
-diff --git a/node_modules/react-native-track-player/android/build/generated/source/buildConfig/debug/com/guichaguri/trackplayer/BuildConfig.java b/node_modules/react-native-track-player/android/build/generated/source/buildConfig/debug/com/guichaguri/trackplayer/BuildConfig.java
+diff --git a/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/androidTest/debug/com/swmansion/gesturehandler/react/test/BuildConfig.java b/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/androidTest/debug/com/swmansion/gesturehandler/react/test/BuildConfig.java
 new file mode 100644
-index 0000000..86d0b3b
+index 0000000..dc64a01
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/generated/source/buildConfig/debug/com/guichaguri/trackplayer/BuildConfig.java
++++ b/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/androidTest/debug/com/swmansion/gesturehandler/react/test/BuildConfig.java
 @@ -0,0 +1,13 @@
 +/**
 + * Automatically generated file. DO NOT MODIFY
 + */
-+package com.guichaguri.trackplayer;
++package com.swmansion.gesturehandler.react.test;
 +
 +public final class BuildConfig {
 +  public static final boolean DEBUG = Boolean.parseBoolean("true");
-+  public static final String APPLICATION_ID = "com.guichaguri.trackplayer";
++  public static final String APPLICATION_ID = "com.swmansion.gesturehandler.react.test";
 +  public static final String BUILD_TYPE = "debug";
 +  public static final String FLAVOR = "";
 +  public static final int VERSION_CODE = 1;
 +  public static final String VERSION_NAME = "1.0";
 +}
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml b/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
+diff --git a/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/debug/com/swmansion/gesturehandler/react/BuildConfig.java b/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/debug/com/swmansion/gesturehandler/react/BuildConfig.java
 new file mode 100644
-index 0000000..a8ca00e
+index 0000000..bd6dac7
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
-@@ -0,0 +1,34 @@
++++ b/node_modules/react-native-gesture-handler/android/build/generated/source/buildConfig/debug/com/swmansion/gesturehandler/react/BuildConfig.java
+@@ -0,0 +1,18 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package com.swmansion.gesturehandler.react;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = Boolean.parseBoolean("true");
++  public static final String LIBRARY_PACKAGE_NAME = "com.swmansion.gesturehandler.react";
++  /**
++   * @deprecated APPLICATION_ID is misleading in libraries. For the library package name use LIBRARY_PACKAGE_NAME
++   */
++  @Deprecated
++  public static final String APPLICATION_ID = "com.swmansion.gesturehandler.react";
++  public static final String BUILD_TYPE = "debug";
++  public static final String FLAVOR = "";
++  public static final int VERSION_CODE = 1;
++  public static final String VERSION_NAME = "1.0";
++}
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..ff3611b
+--- /dev/null
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
+@@ -0,0 +1,11 @@
 +<?xml version="1.0" encoding="utf-8"?>
 +<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-+    package="com.guichaguri.trackplayer"
++    package="com.swmansion.gesturehandler.react"
 +    android:versionCode="1"
 +    android:versionName="1.0" >
 +
@@ -33,200 +57,320 @@ index 0000000..a8ca00e
 +        android:minSdkVersion="16"
 +        android:targetSdkVersion="28" />
 +
-+    <uses-permission android:name="android.permission.WAKE_LOCK" />
-+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-+
-+    <application>
-+
-+        <!-- The main service, handles playback, playlists and media buttons -->
-+        <service
-+            android:name="com.guichaguri.trackplayer.service.MusicService"
-+            android:enabled="true"
-+            android:exported="true" >
-+            <intent-filter>
-+                <action android:name="android.intent.action.MEDIA_BUTTON" />
-+            </intent-filter>
-+        </service>
-+
-+        <!-- A receiver that will receive media buttons. Required on pre-lollipop devices -->
-+        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
-+            <intent-filter>
-+                <action android:name="android.intent.action.MEDIA_BUTTON" />
-+            </intent-filter>
-+        </receiver>
-+    </application>
-+
 +</manifest>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json b/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json b/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json
 new file mode 100644
-index 0000000..8b678c0
+index 0000000..b5c89ae
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output.json
 @@ -0,0 +1 @@
-+[{"outputType":{"type":"AAPT_FRIENDLY_MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0","enabled":true,"outputFile":"react-native-track-player-debug.aar","fullName":"debug","baseName":"debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.guichaguri.trackplayer","split":""}}]
++[{"outputType":{"type":"AAPT_FRIENDLY_MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0","enabled":true,"outputFile":"react-native-gesture-handler-debug.aar","fullName":"debug","baseName":"debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.swmansion.gesturehandler.react","split":""}}]
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json b/node_modules/react-native-track-player/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json b/node_modules/react-native-gesture-handler/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
 new file mode 100644
 index 0000000..9e26dfe
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
 @@ -0,0 +1 @@
 +{}
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/compile_library_classes/debug/classes.jar b/node_modules/react-native-track-player/android/build/intermediates/compile_library_classes/debug/classes.jar
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/compile_library_classes/debug/classes.jar b/node_modules/react-native-gesture-handler/android/build/intermediates/compile_library_classes/debug/classes.jar
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/generateDebugRFile/R.jar b/node_modules/react-native-track-player/android/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/generateDebugRFile/R.jar
+index 0000000..768372f
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/compile_library_classes/debug/classes.jar differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/generateDebugRFile/R.jar b/node_modules/react-native-gesture-handler/android/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/generateDebugRFile/R.jar
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/debug-mergeJniLibs/merge-state b/node_modules/react-native-track-player/android/build/intermediates/incremental/debug-mergeJniLibs/merge-state
+index 0000000..8cb1d7c
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/generateDebugRFile/R.jar differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/debug-mergeJniLibs/merge-state b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/debug-mergeJniLibs/merge-state
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+index 0000000..1c1db5e
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/debug-mergeJniLibs/merge-state differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
 new file mode 100644
-index 0000000..01a18ae
+index 0000000..553e2d6
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
 @@ -0,0 +1,2 @@
 +<?xml version="1.0" encoding="utf-8"?>
-+<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/debug/jniLibs"/></dataSet></merger>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/debug/jniLibs"/></dataSet></merger>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
 new file mode 100644
-index 0000000..9316343
+index 0000000..617aca4
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
 @@ -0,0 +1,2 @@
 +<?xml version="1.0" encoding="utf-8"?>
-+<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/debug/shaders"/></dataSet></merger>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/debug/shaders"/></dataSet></merger>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugAssets/merger.xml
 new file mode 100644
-index 0000000..216a769
+index 0000000..7146c32
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugAssets/merger.xml
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugAssets/merger.xml
 @@ -0,0 +1,2 @@
 +<?xml version="1.0" encoding="utf-8"?>
-+<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/assets"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/shader_assets/debug/compileDebugShaders/out"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/debug/assets"/></dataSet></merger>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/assets"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/build/intermediates/shader_assets/debug/compileDebugShaders/out"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/debug/assets"/></dataSet></merger>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties
 new file mode 100644
-index 0000000..6b98135
+index 0000000..fa6ea18
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties
-@@ -0,0 +1,36 @@
-+#Sun Mar 29 10:34:26 MSK 2020
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/forward.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/forward.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/pause.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/pause.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/forward.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/forward.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/play.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/play.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/pause.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/pause.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/play.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/play.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/rewind.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/rewind.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/rewind.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/rewind.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/play.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/play.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/forward.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/forward.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/previous.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/previous.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/stop.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/stop.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/rewind.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/rewind.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/pause.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/pause.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/pause.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/pause.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/forward.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/forward.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/rewind.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/rewind.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/next.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/next.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/stop.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/stop.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/stop.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/stop.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/next.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/next.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/play.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/play.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/next.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/next.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/stop.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/stop.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/next.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/next.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/rewind.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/rewind.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/previous.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/previous.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/pause.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/pause.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/previous.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/previous.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/play.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/play.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/previous.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/previous.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/previous.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/previous.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/next.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/next.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/stop.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/stop.png
-+/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/forward.png=/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/forward.png
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/merger.xml b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/merger.xml
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Tue Mar 31 18:40:34 MSK 2020
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/merger.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/merger.xml
 new file mode 100644
-index 0000000..3ad4a33
+index 0000000..8ffde5e
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/incremental/packageDebugResources/merger.xml
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/incremental/packageDebugResources/merger.xml
 @@ -0,0 +1,2 @@
 +<?xml version="1.0" encoding="utf-8"?>
-+<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/generated/res/rs/debug"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res"><file name="rewind" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/rewind.png" qualifiers="hdpi-v4" type="drawable"/><file name="stop" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/stop.png" qualifiers="hdpi-v4" type="drawable"/><file name="forward" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/forward.png" qualifiers="hdpi-v4" type="drawable"/><file name="play" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/play.png" qualifiers="hdpi-v4" type="drawable"/><file name="next" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/next.png" qualifiers="hdpi-v4" type="drawable"/><file name="previous" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/previous.png" qualifiers="hdpi-v4" type="drawable"/><file name="pause" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-hdpi/pause.png" qualifiers="hdpi-v4" type="drawable"/><file name="rewind" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/rewind.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="stop" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/stop.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="forward" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/forward.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="play" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/play.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="next" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/next.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="previous" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/previous.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="pause" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxhdpi/pause.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="rewind" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/rewind.png" qualifiers="xhdpi-v4" type="drawable"/><file name="stop" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/stop.png" qualifiers="xhdpi-v4" type="drawable"/><file name="forward" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/forward.png" qualifiers="xhdpi-v4" type="drawable"/><file name="play" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/play.png" qualifiers="xhdpi-v4" type="drawable"/><file name="next" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/next.png" qualifiers="xhdpi-v4" type="drawable"/><file name="previous" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/previous.png" qualifiers="xhdpi-v4" type="drawable"/><file name="pause" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xhdpi/pause.png" qualifiers="xhdpi-v4" type="drawable"/><file name="rewind" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/rewind.png" qualifiers="mdpi-v4" type="drawable"/><file name="stop" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/stop.png" qualifiers="mdpi-v4" type="drawable"/><file name="forward" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/forward.png" qualifiers="mdpi-v4" type="drawable"/><file name="play" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/play.png" qualifiers="mdpi-v4" type="drawable"/><file name="next" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/next.png" qualifiers="mdpi-v4" type="drawable"/><file name="previous" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/previous.png" qualifiers="mdpi-v4" type="drawable"/><file name="pause" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-mdpi/pause.png" qualifiers="mdpi-v4" type="drawable"/><file name="rewind" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/rewind.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="stop" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/stop.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="forward" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/forward.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="play" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/play.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="next" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/next.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="previous" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/previous.png" qualifiers="xxxhdpi-v4" type="drawable"/><file name="pause" path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/res/drawable-xxxhdpi/pause.png" qualifiers="xxxhdpi-v4" type="drawable"/></source><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/generated/res/rs/debug"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/debug/res"/></dataSet><mergedItems/></merger>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/res"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/build/generated/res/rs/debug"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/res"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/build/generated/res/rs/debug"/><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/debug/res"/></dataSet><mergedItems/></merger>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/BuildConfig.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/BuildConfig.class
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/facebook/react/views/modal/RNGHModalUtils.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/facebook/react/views/modal/RNGHModalUtils.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/TrackPlayer.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/TrackPlayer.class
+index 0000000..fedf1dd
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/facebook/react/views/modal/RNGHModalUtils.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/BaseGestureHandlerInteractionController.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/BaseGestureHandlerInteractionController.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/module/MusicEvents.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/module/MusicEvents.class
+index 0000000..e8696d8
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/BaseGestureHandlerInteractionController.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler$1.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/module/MusicModule.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/module/MusicModule.class
+index 0000000..36cceab
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicBinder.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicBinder.class
+index 0000000..60f3fbc
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/FlingGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicManager$1.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicManager$1.class
+index 0000000..f69d41c
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerInteractionController.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerInteractionController.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicManager.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicManager.class
+index 0000000..33609a9
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerInteractionController.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator$1.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicService.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/MusicService.class
+index 0000000..d9f2516
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/Utils.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/Utils.class
+index 0000000..b95ae83
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerOrchestrator.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistry.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistry.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/ButtonEvents.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/ButtonEvents.class
+index 0000000..b161f9d
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistry.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistryImpl.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistryImpl.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/MetadataManager$1.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/MetadataManager$1.class
+index 0000000..caa23be
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureHandlerRegistryImpl.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureUtils.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureUtils.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/MetadataManager.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/metadata/MetadataManager.class
+index 0000000..46dac7a
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/GestureUtils.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler$1.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track$1.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track$1.class
+index 0000000..e93b978
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track$2.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track$2.class
+index 0000000..666faed
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/LongPressGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/NativeViewGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/NativeViewGestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/Track.class
+index 0000000..5a184c7
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/NativeViewGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/OnTouchEventListener.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/OnTouchEventListener.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/TrackType.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/models/TrackType.class
+index 0000000..db48cc5
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/OnTouchEventListener.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PanGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PanGestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/player/ExoPlayback.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/player/ExoPlayback.class
+index 0000000..e8eb33f
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PanGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler$1.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/player/LocalPlayback.class b/node_modules/react-native-track-player/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/guichaguri/trackplayer/service/player/LocalPlayback.class
+index 0000000..16e0319
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/library_java_res/debug/res.jar b/node_modules/react-native-track-player/android/build/intermediates/library_java_res/debug/res.jar
+index 0000000..e7b010f
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PinchGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEvents.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEvents.class
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/library_manifest/debug/AndroidManifest.xml b/node_modules/react-native-track-player/android/build/intermediates/library_manifest/debug/AndroidManifest.xml
+index 0000000..de24767
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEvents.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsConfig.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsConfig.class
 new file mode 100644
-index 0000000..a8ca00e
+index 0000000..2b97e34
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsConfig.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsSpec.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsSpec.class
+new file mode 100644
+index 0000000..f577746
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/PointerEventsSpec.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector$OnRotationGestureListener.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector$OnRotationGestureListener.class
+new file mode 100644
+index 0000000..d7e5a9a
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector$OnRotationGestureListener.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector.class
+new file mode 100644
+index 0000000..631c349
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureDetector.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler$1.class
+new file mode 100644
+index 0000000..5e8ead4
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler.class
+new file mode 100644
+index 0000000..e075e25
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/RotationGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler$1.class
+new file mode 100644
+index 0000000..0b686e8
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler.class
+new file mode 100644
+index 0000000..7148813
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/TapGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/ViewConfigurationHelper.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/ViewConfigurationHelper.class
+new file mode 100644
+index 0000000..65bdd41
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/ViewConfigurationHelper.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/BuildConfig.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/BuildConfig.class
+new file mode 100644
+index 0000000..d8aaba7
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/BuildConfig.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager$ButtonViewGroup.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager$ButtonViewGroup.class
+new file mode 100644
+index 0000000..5396b55
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager$ButtonViewGroup.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.class
+new file mode 100644
+index 0000000..772468a
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEnabledRootView.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEnabledRootView.class
+new file mode 100644
+index 0000000..5c0eeac
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEnabledRootView.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEvent.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEvent.class
+new file mode 100644
+index 0000000..ea131fc
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEvent.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEventDataExtractor.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEventDataExtractor.class
+new file mode 100644
+index 0000000..b7c8de0
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerEventDataExtractor.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerInteractionManager.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerInteractionManager.class
+new file mode 100644
+index 0000000..efae2ae
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerInteractionManager.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$1.class
+new file mode 100644
+index 0000000..c289796
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$2.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$2.class
+new file mode 100644
+index 0000000..e57e385
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$2.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$FlingGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$FlingGestureHandlerFactory.class
+new file mode 100644
+index 0000000..816fd1a
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$FlingGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$HandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$HandlerFactory.class
+new file mode 100644
+index 0000000..d51a03f
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$HandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$LongPressGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$LongPressGestureHandlerFactory.class
+new file mode 100644
+index 0000000..1cfb6c2
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$LongPressGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$NativeViewGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$NativeViewGestureHandlerFactory.class
+new file mode 100644
+index 0000000..1947b28
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$NativeViewGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PanGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PanGestureHandlerFactory.class
+new file mode 100644
+index 0000000..fd5dad8
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PanGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PinchGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PinchGestureHandlerFactory.class
+new file mode 100644
+index 0000000..dd3683d
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$PinchGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$RotationGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$RotationGestureHandlerFactory.class
+new file mode 100644
+index 0000000..0c551e6
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$RotationGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$TapGestureHandlerFactory.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$TapGestureHandlerFactory.class
+new file mode 100644
+index 0000000..91237a9
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule$TapGestureHandlerFactory.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule.class
+new file mode 100644
+index 0000000..6be2b36
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerModule.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerPackage.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerPackage.class
+new file mode 100644
+index 0000000..9647ed0
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerPackage.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRegistry.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRegistry.class
+new file mode 100644
+index 0000000..b6b3caf
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRegistry.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$1.class
+new file mode 100644
+index 0000000..d9add39
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$RootViewGestureHandler.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$RootViewGestureHandler.class
+new file mode 100644
+index 0000000..0edf608
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper$RootViewGestureHandler.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper.class
+new file mode 100644
+index 0000000..ef2906c
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootHelper.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootInterface.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootInterface.class
+new file mode 100644
+index 0000000..d7e5ebd
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootInterface.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootView.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootView.class
+new file mode 100644
+index 0000000..8312f76
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootView.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootViewManager.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootViewManager.class
+new file mode 100644
+index 0000000..fd32004
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerRootViewManager.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerStateChangeEvent.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerStateChangeEvent.class
+new file mode 100644
+index 0000000..2303125
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNGestureHandlerStateChangeEvent.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper$1.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper$1.class
+new file mode 100644
+index 0000000..a711c7e
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper$1.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper.class b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper.class
+new file mode 100644
+index 0000000..a58d11a
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/swmansion/gesturehandler/react/RNViewConfigurationHelper.class differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/library_java_res/debug/res.jar b/node_modules/react-native-gesture-handler/android/build/intermediates/library_java_res/debug/res.jar
+new file mode 100644
+index 0000000..15cb0ec
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/library_java_res/debug/res.jar differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml b/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml
+new file mode 100644
+index 0000000..ff3611b
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/library_manifest/debug/AndroidManifest.xml
-@@ -0,0 +1,34 @@
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml
+@@ -0,0 +1,11 @@
 +<?xml version="1.0" encoding="utf-8"?>
 +<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-+    package="com.guichaguri.trackplayer"
++    package="com.swmansion.gesturehandler.react"
 +    android:versionCode="1"
 +    android:versionName="1.0" >
 +
@@ -234,151 +378,23 @@ index 0000000..a8ca00e
 +        android:minSdkVersion="16"
 +        android:targetSdkVersion="28" />
 +
-+    <uses-permission android:name="android.permission.WAKE_LOCK" />
-+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-+
-+    <application>
-+
-+        <!-- The main service, handles playback, playlists and media buttons -->
-+        <service
-+            android:name="com.guichaguri.trackplayer.service.MusicService"
-+            android:enabled="true"
-+            android:exported="true" >
-+            <intent-filter>
-+                <action android:name="android.intent.action.MEDIA_BUTTON" />
-+            </intent-filter>
-+        </service>
-+
-+        <!-- A receiver that will receive media buttons. Required on pre-lollipop devices -->
-+        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
-+            <intent-filter>
-+                <action android:name="android.intent.action.MEDIA_BUTTON" />
-+            </intent-filter>
-+        </receiver>
-+    </application>
-+
 +</manifest>
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/merged_manifests/debug/output.json b/node_modules/react-native-track-player/android/build/intermediates/merged_manifests/debug/output.json
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/output.json b/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/output.json
 new file mode 100644
-index 0000000..6a984fd
+index 0000000..0fb7bd7
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/merged_manifests/debug/output.json
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/output.json
 @@ -0,0 +1 @@
-+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0","enabled":true,"outputFile":"react-native-track-player-debug.aar","fullName":"debug","baseName":"debug"},"path":"../../library_manifest/debug/AndroidManifest.xml","properties":{"packageId":"com.guichaguri.trackplayer","split":""}}]
++[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0","enabled":true,"outputFile":"react-native-gesture-handler-debug.aar","fullName":"debug","baseName":"debug"},"path":"../../library_manifest/debug/AndroidManifest.xml","properties":{"packageId":"com.swmansion.gesturehandler.react","split":""}}]
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/forward.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/forward.png
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt b/node_modules/react-native-gesture-handler/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/next.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/next.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/pause.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/pause.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/play.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/play.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/previous.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/previous.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/rewind.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/rewind.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/stop.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/stop.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/forward.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/forward.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/next.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/next.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/pause.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/pause.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/play.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/play.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/previous.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/previous.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/rewind.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/rewind.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/stop.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/stop.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/forward.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/forward.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/next.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/next.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/pause.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/pause.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/play.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/play.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/previous.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/previous.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/rewind.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/rewind.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/stop.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/stop.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/forward.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/forward.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/next.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/next.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/pause.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/pause.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/play.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/play.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/previous.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/previous.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/rewind.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/rewind.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/stop.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/stop.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/forward.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/forward.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/next.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/next.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/pause.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/pause.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/play.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/play.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/previous.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/previous.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/rewind.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/rewind.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/stop.png b/node_modules/react-native-track-player/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/stop.png
-new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt b/node_modules/react-native-track-player/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt
-new file mode 100644
-index 0000000..64bda71
+index 0000000..edaad19
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt
-@@ -0,0 +1,1389 @@
-+com.guichaguri.trackplayer
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt
+@@ -0,0 +1,1318 @@
++com.swmansion.gesturehandler.react
 +anim abc_fade_in
 +anim abc_fade_out
 +anim abc_grow_fade_in_from_bottom
@@ -767,7 +783,6 @@ index 0000000..64bda71
 +color material_grey_900
 +color notification_action_color_filter
 +color notification_icon_bg_color
-+color notification_material_background_media_default_color
 +color primary_dark_material_dark
 +color primary_dark_material_light
 +color primary_material_dark
@@ -896,10 +911,6 @@ index 0000000..64bda71
 +dimen notification_subtext_size
 +dimen notification_top_pad
 +dimen notification_top_pad_large_text
-+dimen subtitle_corner_radius
-+dimen subtitle_outline_width
-+dimen subtitle_shadow_offset
-+dimen subtitle_shadow_radius
 +dimen tooltip_corner_radius
 +dimen tooltip_horizontal_padding
 +dimen tooltip_margin
@@ -992,8 +1003,6 @@ index 0000000..64bda71
 +drawable abc_textfield_search_default_mtrl_alpha
 +drawable abc_textfield_search_material
 +drawable abc_vector_test
-+drawable forward
-+drawable next
 +drawable notification_action_background
 +drawable notification_bg
 +drawable notification_bg_low
@@ -1006,54 +1015,15 @@ index 0000000..64bda71
 +drawable notification_template_icon_low_bg
 +drawable notification_tile_bg
 +drawable notify_panel_notification_icon_bg
-+drawable pause
-+drawable play
-+drawable previous
 +drawable redbox_top_border_background
-+drawable rewind
-+drawable stop
 +drawable tooltip_frame_dark
 +drawable tooltip_frame_light
-+id accessibility_action_clickable_span
 +id accessibility_actions
-+id accessibility_custom_action_0
-+id accessibility_custom_action_1
-+id accessibility_custom_action_10
-+id accessibility_custom_action_11
-+id accessibility_custom_action_12
-+id accessibility_custom_action_13
-+id accessibility_custom_action_14
-+id accessibility_custom_action_15
-+id accessibility_custom_action_16
-+id accessibility_custom_action_17
-+id accessibility_custom_action_18
-+id accessibility_custom_action_19
-+id accessibility_custom_action_2
-+id accessibility_custom_action_20
-+id accessibility_custom_action_21
-+id accessibility_custom_action_22
-+id accessibility_custom_action_23
-+id accessibility_custom_action_24
-+id accessibility_custom_action_25
-+id accessibility_custom_action_26
-+id accessibility_custom_action_27
-+id accessibility_custom_action_28
-+id accessibility_custom_action_29
-+id accessibility_custom_action_3
-+id accessibility_custom_action_30
-+id accessibility_custom_action_31
-+id accessibility_custom_action_4
-+id accessibility_custom_action_5
-+id accessibility_custom_action_6
-+id accessibility_custom_action_7
-+id accessibility_custom_action_8
-+id accessibility_custom_action_9
 +id accessibility_hint
 +id accessibility_label
 +id accessibility_role
 +id accessibility_state
 +id accessibility_value
-+id action0
 +id action_bar
 +id action_bar_activity_content
 +id action_bar_container
@@ -1079,7 +1049,6 @@ index 0000000..64bda71
 +id blocking
 +id bottom
 +id buttonPanel
-+id cancel_action
 +id catalyst_redbox_title
 +id center
 +id centerCrop
@@ -1092,10 +1061,8 @@ index 0000000..64bda71
 +id customPanel
 +id decor_content_parent
 +id default_activity_button
-+id dialog_button
 +id edit_query
 +id end
-+id end_padder
 +id expand_activities_button
 +id expanded_menu
 +id fitBottomStart
@@ -1118,7 +1085,6 @@ index 0000000..64bda71
 +id line3
 +id listMode
 +id list_item
-+id media_actions
 +id message
 +id multiply
 +id none
@@ -1165,15 +1131,9 @@ index 0000000..64bda71
 +id src_in
 +id src_over
 +id start
-+id status_bar_latest_event_content
 +id submenuarrow
 +id submit_area
 +id tabMode
-+id tag_accessibility_actions
-+id tag_accessibility_clickable_spans
-+id tag_accessibility_heading
-+id tag_accessibility_pane_title
-+id tag_screen_reader_focusable
 +id tag_transition_group
 +id tag_unhandled_key_event_manager
 +id tag_unhandled_key_listeners
@@ -1227,22 +1187,12 @@ index 0000000..64bda71
 +layout abc_search_view
 +layout abc_select_dialog_material
 +layout abc_tooltip
-+layout custom_dialog
 +layout dev_loading_view
 +layout fps_view
 +layout notification_action
 +layout notification_action_tombstone
-+layout notification_media_action
-+layout notification_media_cancel_action
-+layout notification_template_big_media
-+layout notification_template_big_media_custom
-+layout notification_template_big_media_narrow
-+layout notification_template_big_media_narrow_custom
 +layout notification_template_custom_big
 +layout notification_template_icon_group
-+layout notification_template_lines_media
-+layout notification_template_media
-+layout notification_template_media_custom
 +layout notification_template_part_chronometer
 +layout notification_template_part_time
 +layout redbox_item_frame
@@ -1596,14 +1546,9 @@ index 0000000..64bda71
 +style TextAppearance_AppCompat_Widget_TextView_SpinnerItem
 +style TextAppearance_Compat_Notification
 +style TextAppearance_Compat_Notification_Info
-+style TextAppearance_Compat_Notification_Info_Media
 +style TextAppearance_Compat_Notification_Line2
-+style TextAppearance_Compat_Notification_Line2_Media
-+style TextAppearance_Compat_Notification_Media
 +style TextAppearance_Compat_Notification_Time
-+style TextAppearance_Compat_Notification_Time_Media
 +style TextAppearance_Compat_Notification_Title
-+style TextAppearance_Compat_Notification_Title_Media
 +style TextAppearance_Widget_AppCompat_ExpandedMenu_Item
 +style TextAppearance_Widget_AppCompat_Toolbar_Subtitle
 +style TextAppearance_Widget_AppCompat_Toolbar_Title
@@ -1767,15 +1712,16 @@ index 0000000..64bda71
 +styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 +styleable ViewStubCompat android_id android_inflatedId android_layout
 +xml rn_dev_preferences
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/runtime_library_classes/debug/classes.jar b/node_modules/react-native-track-player/android/build/intermediates/runtime_library_classes/debug/classes.jar
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/runtime_library_classes/debug/classes.jar b/node_modules/react-native-gesture-handler/android/build/intermediates/runtime_library_classes/debug/classes.jar
 new file mode 100644
-index 0000000..e69de29
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/symbols/debug/R.txt b/node_modules/react-native-track-player/android/build/intermediates/symbols/debug/R.txt
+index 0000000..768372f
+Binary files /dev/null and b/node_modules/react-native-gesture-handler/android/build/intermediates/runtime_library_classes/debug/classes.jar differ
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/symbols/debug/R.txt b/node_modules/react-native-gesture-handler/android/build/intermediates/symbols/debug/R.txt
 new file mode 100644
-index 0000000..97a5452
+index 0000000..96651c0
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/symbols/debug/R.txt
-@@ -0,0 +1,1863 @@
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/symbols/debug/R.txt
+@@ -0,0 +1,1792 @@
 +int anim abc_fade_in 0x7f010001
 +int anim abc_fade_out 0x7f010002
 +int anim abc_grow_fade_in_from_bottom 0x7f010003
@@ -2164,29 +2110,28 @@ index 0000000..97a5452
 +int color material_grey_900 0x7f06003e
 +int color notification_action_color_filter 0x7f06003f
 +int color notification_icon_bg_color 0x7f060040
-+int color notification_material_background_media_default_color 0x7f060041
-+int color primary_dark_material_dark 0x7f060042
-+int color primary_dark_material_light 0x7f060043
-+int color primary_material_dark 0x7f060044
-+int color primary_material_light 0x7f060045
-+int color primary_text_default_material_dark 0x7f060046
-+int color primary_text_default_material_light 0x7f060047
-+int color primary_text_disabled_material_dark 0x7f060048
-+int color primary_text_disabled_material_light 0x7f060049
-+int color ripple_material_dark 0x7f06004a
-+int color ripple_material_light 0x7f06004b
-+int color secondary_text_default_material_dark 0x7f06004c
-+int color secondary_text_default_material_light 0x7f06004d
-+int color secondary_text_disabled_material_dark 0x7f06004e
-+int color secondary_text_disabled_material_light 0x7f06004f
-+int color switch_thumb_disabled_material_dark 0x7f060050
-+int color switch_thumb_disabled_material_light 0x7f060051
-+int color switch_thumb_material_dark 0x7f060052
-+int color switch_thumb_material_light 0x7f060053
-+int color switch_thumb_normal_material_dark 0x7f060054
-+int color switch_thumb_normal_material_light 0x7f060055
-+int color tooltip_background_dark 0x7f060056
-+int color tooltip_background_light 0x7f060057
++int color primary_dark_material_dark 0x7f060041
++int color primary_dark_material_light 0x7f060042
++int color primary_material_dark 0x7f060043
++int color primary_material_light 0x7f060044
++int color primary_text_default_material_dark 0x7f060045
++int color primary_text_default_material_light 0x7f060046
++int color primary_text_disabled_material_dark 0x7f060047
++int color primary_text_disabled_material_light 0x7f060048
++int color ripple_material_dark 0x7f060049
++int color ripple_material_light 0x7f06004a
++int color secondary_text_default_material_dark 0x7f06004b
++int color secondary_text_default_material_light 0x7f06004c
++int color secondary_text_disabled_material_dark 0x7f06004d
++int color secondary_text_disabled_material_light 0x7f06004e
++int color switch_thumb_disabled_material_dark 0x7f06004f
++int color switch_thumb_disabled_material_light 0x7f060050
++int color switch_thumb_material_dark 0x7f060051
++int color switch_thumb_material_light 0x7f060052
++int color switch_thumb_normal_material_dark 0x7f060053
++int color switch_thumb_normal_material_light 0x7f060054
++int color tooltip_background_dark 0x7f060055
++int color tooltip_background_light 0x7f060056
 +int dimen abc_action_bar_content_inset_material 0x7f070001
 +int dimen abc_action_bar_content_inset_with_nav 0x7f070002
 +int dimen abc_action_bar_default_height_material 0x7f070003
@@ -2293,18 +2238,14 @@ index 0000000..97a5452
 +int dimen notification_subtext_size 0x7f070068
 +int dimen notification_top_pad 0x7f070069
 +int dimen notification_top_pad_large_text 0x7f07006a
-+int dimen subtitle_corner_radius 0x7f07006b
-+int dimen subtitle_outline_width 0x7f07006c
-+int dimen subtitle_shadow_offset 0x7f07006d
-+int dimen subtitle_shadow_radius 0x7f07006e
-+int dimen tooltip_corner_radius 0x7f07006f
-+int dimen tooltip_horizontal_padding 0x7f070070
-+int dimen tooltip_margin 0x7f070071
-+int dimen tooltip_precise_anchor_extra_offset 0x7f070072
-+int dimen tooltip_precise_anchor_threshold 0x7f070073
-+int dimen tooltip_vertical_padding 0x7f070074
-+int dimen tooltip_y_offset_non_touch 0x7f070075
-+int dimen tooltip_y_offset_touch 0x7f070076
++int dimen tooltip_corner_radius 0x7f07006b
++int dimen tooltip_horizontal_padding 0x7f07006c
++int dimen tooltip_margin 0x7f07006d
++int dimen tooltip_precise_anchor_extra_offset 0x7f07006e
++int dimen tooltip_precise_anchor_threshold 0x7f07006f
++int dimen tooltip_vertical_padding 0x7f070070
++int dimen tooltip_y_offset_non_touch 0x7f070071
++int dimen tooltip_y_offset_touch 0x7f070072
 +int drawable abc_ab_share_pack_mtrl_alpha 0x7f080001
 +int drawable abc_action_bar_item_background_material 0x7f080002
 +int drawable abc_btn_borderless_material 0x7f080003
@@ -2389,206 +2330,155 @@ index 0000000..97a5452
 +int drawable abc_textfield_search_default_mtrl_alpha 0x7f080052
 +int drawable abc_textfield_search_material 0x7f080053
 +int drawable abc_vector_test 0x7f080054
-+int drawable forward 0x7f080055
-+int drawable next 0x7f080056
-+int drawable notification_action_background 0x7f080057
-+int drawable notification_bg 0x7f080058
-+int drawable notification_bg_low 0x7f080059
-+int drawable notification_bg_low_normal 0x7f08005a
-+int drawable notification_bg_low_pressed 0x7f08005b
-+int drawable notification_bg_normal 0x7f08005c
-+int drawable notification_bg_normal_pressed 0x7f08005d
-+int drawable notification_icon_background 0x7f08005e
-+int drawable notification_template_icon_bg 0x7f08005f
-+int drawable notification_template_icon_low_bg 0x7f080060
-+int drawable notification_tile_bg 0x7f080061
-+int drawable notify_panel_notification_icon_bg 0x7f080062
-+int drawable pause 0x7f080063
-+int drawable play 0x7f080064
-+int drawable previous 0x7f080065
-+int drawable redbox_top_border_background 0x7f080066
-+int drawable rewind 0x7f080067
-+int drawable stop 0x7f080068
-+int drawable tooltip_frame_dark 0x7f080069
-+int drawable tooltip_frame_light 0x7f08006a
-+int id accessibility_action_clickable_span 0x7f0b0001
-+int id accessibility_actions 0x7f0b0002
-+int id accessibility_custom_action_0 0x7f0b0003
-+int id accessibility_custom_action_1 0x7f0b0004
-+int id accessibility_custom_action_10 0x7f0b0005
-+int id accessibility_custom_action_11 0x7f0b0006
-+int id accessibility_custom_action_12 0x7f0b0007
-+int id accessibility_custom_action_13 0x7f0b0008
-+int id accessibility_custom_action_14 0x7f0b0009
-+int id accessibility_custom_action_15 0x7f0b000a
-+int id accessibility_custom_action_16 0x7f0b000b
-+int id accessibility_custom_action_17 0x7f0b000c
-+int id accessibility_custom_action_18 0x7f0b000d
-+int id accessibility_custom_action_19 0x7f0b000e
-+int id accessibility_custom_action_2 0x7f0b000f
-+int id accessibility_custom_action_20 0x7f0b0010
-+int id accessibility_custom_action_21 0x7f0b0011
-+int id accessibility_custom_action_22 0x7f0b0012
-+int id accessibility_custom_action_23 0x7f0b0013
-+int id accessibility_custom_action_24 0x7f0b0014
-+int id accessibility_custom_action_25 0x7f0b0015
-+int id accessibility_custom_action_26 0x7f0b0016
-+int id accessibility_custom_action_27 0x7f0b0017
-+int id accessibility_custom_action_28 0x7f0b0018
-+int id accessibility_custom_action_29 0x7f0b0019
-+int id accessibility_custom_action_3 0x7f0b001a
-+int id accessibility_custom_action_30 0x7f0b001b
-+int id accessibility_custom_action_31 0x7f0b001c
-+int id accessibility_custom_action_4 0x7f0b001d
-+int id accessibility_custom_action_5 0x7f0b001e
-+int id accessibility_custom_action_6 0x7f0b001f
-+int id accessibility_custom_action_7 0x7f0b0020
-+int id accessibility_custom_action_8 0x7f0b0021
-+int id accessibility_custom_action_9 0x7f0b0022
-+int id accessibility_hint 0x7f0b0023
-+int id accessibility_label 0x7f0b0024
-+int id accessibility_role 0x7f0b0025
-+int id accessibility_state 0x7f0b0026
-+int id accessibility_value 0x7f0b0027
-+int id action0 0x7f0b0028
-+int id action_bar 0x7f0b0029
-+int id action_bar_activity_content 0x7f0b002a
-+int id action_bar_container 0x7f0b002b
-+int id action_bar_root 0x7f0b002c
-+int id action_bar_spinner 0x7f0b002d
-+int id action_bar_subtitle 0x7f0b002e
-+int id action_bar_title 0x7f0b002f
-+int id action_container 0x7f0b0030
-+int id action_context_bar 0x7f0b0031
-+int id action_divider 0x7f0b0032
-+int id action_image 0x7f0b0033
-+int id action_menu_divider 0x7f0b0034
-+int id action_menu_presenter 0x7f0b0035
-+int id action_mode_bar 0x7f0b0036
-+int id action_mode_bar_stub 0x7f0b0037
-+int id action_mode_close_button 0x7f0b0038
-+int id action_text 0x7f0b0039
-+int id actions 0x7f0b003a
-+int id activity_chooser_view_content 0x7f0b003b
-+int id add 0x7f0b003c
-+int id alertTitle 0x7f0b003d
-+int id async 0x7f0b003e
-+int id blocking 0x7f0b003f
-+int id bottom 0x7f0b0040
-+int id buttonPanel 0x7f0b0041
-+int id cancel_action 0x7f0b0042
-+int id catalyst_redbox_title 0x7f0b0043
-+int id center 0x7f0b0044
-+int id centerCrop 0x7f0b0045
-+int id centerInside 0x7f0b0046
-+int id checkbox 0x7f0b0047
-+int id chronometer 0x7f0b0048
-+int id content 0x7f0b0049
-+int id contentPanel 0x7f0b004a
-+int id custom 0x7f0b004b
-+int id customPanel 0x7f0b004c
-+int id decor_content_parent 0x7f0b004d
-+int id default_activity_button 0x7f0b004e
-+int id dialog_button 0x7f0b004f
-+int id edit_query 0x7f0b0050
-+int id end 0x7f0b0051
-+int id end_padder 0x7f0b0052
-+int id expand_activities_button 0x7f0b0053
-+int id expanded_menu 0x7f0b0054
-+int id fitBottomStart 0x7f0b0055
-+int id fitCenter 0x7f0b0056
-+int id fitEnd 0x7f0b0057
-+int id fitStart 0x7f0b0058
-+int id fitXY 0x7f0b0059
-+int id focusCrop 0x7f0b005a
-+int id forever 0x7f0b005b
-+int id fps_text 0x7f0b005c
-+int id group_divider 0x7f0b005d
-+int id home 0x7f0b005e
-+int id icon 0x7f0b005f
-+int id icon_group 0x7f0b0060
-+int id image 0x7f0b0061
-+int id info 0x7f0b0062
-+int id italic 0x7f0b0063
-+int id left 0x7f0b0064
-+int id line1 0x7f0b0065
-+int id line3 0x7f0b0066
-+int id listMode 0x7f0b0067
-+int id list_item 0x7f0b0068
-+int id media_actions 0x7f0b0069
-+int id message 0x7f0b006a
-+int id multiply 0x7f0b006b
-+int id none 0x7f0b006c
-+int id normal 0x7f0b006d
-+int id notification_background 0x7f0b006e
-+int id notification_main_column 0x7f0b006f
-+int id notification_main_column_container 0x7f0b0070
-+int id parentPanel 0x7f0b0071
-+int id progress_circular 0x7f0b0072
-+int id progress_horizontal 0x7f0b0073
-+int id radio 0x7f0b0074
-+int id react_test_id 0x7f0b0075
-+int id right 0x7f0b0076
-+int id right_icon 0x7f0b0077
-+int id right_side 0x7f0b0078
-+int id rn_frame_file 0x7f0b0079
-+int id rn_frame_method 0x7f0b007a
-+int id rn_redbox_dismiss_button 0x7f0b007b
-+int id rn_redbox_line_separator 0x7f0b007c
-+int id rn_redbox_loading_indicator 0x7f0b007d
-+int id rn_redbox_reload_button 0x7f0b007e
-+int id rn_redbox_report_button 0x7f0b007f
-+int id rn_redbox_report_label 0x7f0b0080
-+int id rn_redbox_stack 0x7f0b0081
-+int id screen 0x7f0b0082
-+int id scrollIndicatorDown 0x7f0b0083
-+int id scrollIndicatorUp 0x7f0b0084
-+int id scrollView 0x7f0b0085
-+int id search_badge 0x7f0b0086
-+int id search_bar 0x7f0b0087
-+int id search_button 0x7f0b0088
-+int id search_close_btn 0x7f0b0089
-+int id search_edit_frame 0x7f0b008a
-+int id search_go_btn 0x7f0b008b
-+int id search_mag_icon 0x7f0b008c
-+int id search_plate 0x7f0b008d
-+int id search_src_text 0x7f0b008e
-+int id search_voice_btn 0x7f0b008f
-+int id select_dialog_listview 0x7f0b0090
-+int id shortcut 0x7f0b0091
-+int id spacer 0x7f0b0092
-+int id split_action_bar 0x7f0b0093
-+int id src_atop 0x7f0b0094
-+int id src_in 0x7f0b0095
-+int id src_over 0x7f0b0096
-+int id start 0x7f0b0097
-+int id status_bar_latest_event_content 0x7f0b0098
-+int id submenuarrow 0x7f0b0099
-+int id submit_area 0x7f0b009a
-+int id tabMode 0x7f0b009b
-+int id tag_accessibility_actions 0x7f0b009c
-+int id tag_accessibility_clickable_spans 0x7f0b009d
-+int id tag_accessibility_heading 0x7f0b009e
-+int id tag_accessibility_pane_title 0x7f0b009f
-+int id tag_screen_reader_focusable 0x7f0b00a0
-+int id tag_transition_group 0x7f0b00a1
-+int id tag_unhandled_key_event_manager 0x7f0b00a2
-+int id tag_unhandled_key_listeners 0x7f0b00a3
-+int id text 0x7f0b00a4
-+int id text2 0x7f0b00a5
-+int id textSpacerNoButtons 0x7f0b00a6
-+int id textSpacerNoTitle 0x7f0b00a7
-+int id time 0x7f0b00a8
-+int id title 0x7f0b00a9
-+int id titleDividerNoCustom 0x7f0b00aa
-+int id title_template 0x7f0b00ab
-+int id top 0x7f0b00ac
-+int id topPanel 0x7f0b00ad
-+int id uniform 0x7f0b00ae
-+int id up 0x7f0b00af
-+int id view_tag_instance_handle 0x7f0b00b0
-+int id view_tag_native_id 0x7f0b00b1
-+int id wrap_content 0x7f0b00b2
++int drawable notification_action_background 0x7f080055
++int drawable notification_bg 0x7f080056
++int drawable notification_bg_low 0x7f080057
++int drawable notification_bg_low_normal 0x7f080058
++int drawable notification_bg_low_pressed 0x7f080059
++int drawable notification_bg_normal 0x7f08005a
++int drawable notification_bg_normal_pressed 0x7f08005b
++int drawable notification_icon_background 0x7f08005c
++int drawable notification_template_icon_bg 0x7f08005d
++int drawable notification_template_icon_low_bg 0x7f08005e
++int drawable notification_tile_bg 0x7f08005f
++int drawable notify_panel_notification_icon_bg 0x7f080060
++int drawable redbox_top_border_background 0x7f080061
++int drawable tooltip_frame_dark 0x7f080062
++int drawable tooltip_frame_light 0x7f080063
++int id accessibility_actions 0x7f0b0001
++int id accessibility_hint 0x7f0b0002
++int id accessibility_label 0x7f0b0003
++int id accessibility_role 0x7f0b0004
++int id accessibility_state 0x7f0b0005
++int id accessibility_value 0x7f0b0006
++int id action_bar 0x7f0b0007
++int id action_bar_activity_content 0x7f0b0008
++int id action_bar_container 0x7f0b0009
++int id action_bar_root 0x7f0b000a
++int id action_bar_spinner 0x7f0b000b
++int id action_bar_subtitle 0x7f0b000c
++int id action_bar_title 0x7f0b000d
++int id action_container 0x7f0b000e
++int id action_context_bar 0x7f0b000f
++int id action_divider 0x7f0b0010
++int id action_image 0x7f0b0011
++int id action_menu_divider 0x7f0b0012
++int id action_menu_presenter 0x7f0b0013
++int id action_mode_bar 0x7f0b0014
++int id action_mode_bar_stub 0x7f0b0015
++int id action_mode_close_button 0x7f0b0016
++int id action_text 0x7f0b0017
++int id actions 0x7f0b0018
++int id activity_chooser_view_content 0x7f0b0019
++int id add 0x7f0b001a
++int id alertTitle 0x7f0b001b
++int id async 0x7f0b001c
++int id blocking 0x7f0b001d
++int id bottom 0x7f0b001e
++int id buttonPanel 0x7f0b001f
++int id catalyst_redbox_title 0x7f0b0020
++int id center 0x7f0b0021
++int id centerCrop 0x7f0b0022
++int id centerInside 0x7f0b0023
++int id checkbox 0x7f0b0024
++int id chronometer 0x7f0b0025
++int id content 0x7f0b0026
++int id contentPanel 0x7f0b0027
++int id custom 0x7f0b0028
++int id customPanel 0x7f0b0029
++int id decor_content_parent 0x7f0b002a
++int id default_activity_button 0x7f0b002b
++int id edit_query 0x7f0b002c
++int id end 0x7f0b002d
++int id expand_activities_button 0x7f0b002e
++int id expanded_menu 0x7f0b002f
++int id fitBottomStart 0x7f0b0030
++int id fitCenter 0x7f0b0031
++int id fitEnd 0x7f0b0032
++int id fitStart 0x7f0b0033
++int id fitXY 0x7f0b0034
++int id focusCrop 0x7f0b0035
++int id forever 0x7f0b0036
++int id fps_text 0x7f0b0037
++int id group_divider 0x7f0b0038
++int id home 0x7f0b0039
++int id icon 0x7f0b003a
++int id icon_group 0x7f0b003b
++int id image 0x7f0b003c
++int id info 0x7f0b003d
++int id italic 0x7f0b003e
++int id left 0x7f0b003f
++int id line1 0x7f0b0040
++int id line3 0x7f0b0041
++int id listMode 0x7f0b0042
++int id list_item 0x7f0b0043
++int id message 0x7f0b0044
++int id multiply 0x7f0b0045
++int id none 0x7f0b0046
++int id normal 0x7f0b0047
++int id notification_background 0x7f0b0048
++int id notification_main_column 0x7f0b0049
++int id notification_main_column_container 0x7f0b004a
++int id parentPanel 0x7f0b004b
++int id progress_circular 0x7f0b004c
++int id progress_horizontal 0x7f0b004d
++int id radio 0x7f0b004e
++int id react_test_id 0x7f0b004f
++int id right 0x7f0b0050
++int id right_icon 0x7f0b0051
++int id right_side 0x7f0b0052
++int id rn_frame_file 0x7f0b0053
++int id rn_frame_method 0x7f0b0054
++int id rn_redbox_dismiss_button 0x7f0b0055
++int id rn_redbox_line_separator 0x7f0b0056
++int id rn_redbox_loading_indicator 0x7f0b0057
++int id rn_redbox_reload_button 0x7f0b0058
++int id rn_redbox_report_button 0x7f0b0059
++int id rn_redbox_report_label 0x7f0b005a
++int id rn_redbox_stack 0x7f0b005b
++int id screen 0x7f0b005c
++int id scrollIndicatorDown 0x7f0b005d
++int id scrollIndicatorUp 0x7f0b005e
++int id scrollView 0x7f0b005f
++int id search_badge 0x7f0b0060
++int id search_bar 0x7f0b0061
++int id search_button 0x7f0b0062
++int id search_close_btn 0x7f0b0063
++int id search_edit_frame 0x7f0b0064
++int id search_go_btn 0x7f0b0065
++int id search_mag_icon 0x7f0b0066
++int id search_plate 0x7f0b0067
++int id search_src_text 0x7f0b0068
++int id search_voice_btn 0x7f0b0069
++int id select_dialog_listview 0x7f0b006a
++int id shortcut 0x7f0b006b
++int id spacer 0x7f0b006c
++int id split_action_bar 0x7f0b006d
++int id src_atop 0x7f0b006e
++int id src_in 0x7f0b006f
++int id src_over 0x7f0b0070
++int id start 0x7f0b0071
++int id submenuarrow 0x7f0b0072
++int id submit_area 0x7f0b0073
++int id tabMode 0x7f0b0074
++int id tag_transition_group 0x7f0b0075
++int id tag_unhandled_key_event_manager 0x7f0b0076
++int id tag_unhandled_key_listeners 0x7f0b0077
++int id text 0x7f0b0078
++int id text2 0x7f0b0079
++int id textSpacerNoButtons 0x7f0b007a
++int id textSpacerNoTitle 0x7f0b007b
++int id time 0x7f0b007c
++int id title 0x7f0b007d
++int id titleDividerNoCustom 0x7f0b007e
++int id title_template 0x7f0b007f
++int id top 0x7f0b0080
++int id topPanel 0x7f0b0081
++int id uniform 0x7f0b0082
++int id up 0x7f0b0083
++int id view_tag_instance_handle 0x7f0b0084
++int id view_tag_native_id 0x7f0b0085
++int id wrap_content 0x7f0b0086
 +int integer abc_config_activityDefaultDur 0x7f0c0001
 +int integer abc_config_activityShortDur 0x7f0c0002
 +int integer cancel_button_image_alpha 0x7f0c0003
@@ -2624,31 +2514,21 @@ index 0000000..97a5452
 +int layout abc_search_view 0x7f0e001a
 +int layout abc_select_dialog_material 0x7f0e001b
 +int layout abc_tooltip 0x7f0e001c
-+int layout custom_dialog 0x7f0e001d
-+int layout dev_loading_view 0x7f0e001e
-+int layout fps_view 0x7f0e001f
-+int layout notification_action 0x7f0e0020
-+int layout notification_action_tombstone 0x7f0e0021
-+int layout notification_media_action 0x7f0e0022
-+int layout notification_media_cancel_action 0x7f0e0023
-+int layout notification_template_big_media 0x7f0e0024
-+int layout notification_template_big_media_custom 0x7f0e0025
-+int layout notification_template_big_media_narrow 0x7f0e0026
-+int layout notification_template_big_media_narrow_custom 0x7f0e0027
-+int layout notification_template_custom_big 0x7f0e0028
-+int layout notification_template_icon_group 0x7f0e0029
-+int layout notification_template_lines_media 0x7f0e002a
-+int layout notification_template_media 0x7f0e002b
-+int layout notification_template_media_custom 0x7f0e002c
-+int layout notification_template_part_chronometer 0x7f0e002d
-+int layout notification_template_part_time 0x7f0e002e
-+int layout redbox_item_frame 0x7f0e002f
-+int layout redbox_item_title 0x7f0e0030
-+int layout redbox_view 0x7f0e0031
-+int layout select_dialog_item_material 0x7f0e0032
-+int layout select_dialog_multichoice_material 0x7f0e0033
-+int layout select_dialog_singlechoice_material 0x7f0e0034
-+int layout support_simple_spinner_dropdown_item 0x7f0e0035
++int layout dev_loading_view 0x7f0e001d
++int layout fps_view 0x7f0e001e
++int layout notification_action 0x7f0e001f
++int layout notification_action_tombstone 0x7f0e0020
++int layout notification_template_custom_big 0x7f0e0021
++int layout notification_template_icon_group 0x7f0e0022
++int layout notification_template_part_chronometer 0x7f0e0023
++int layout notification_template_part_time 0x7f0e0024
++int layout redbox_item_frame 0x7f0e0025
++int layout redbox_item_title 0x7f0e0026
++int layout redbox_view 0x7f0e0027
++int layout select_dialog_item_material 0x7f0e0028
++int layout select_dialog_multichoice_material 0x7f0e0029
++int layout select_dialog_singlechoice_material 0x7f0e002a
++int layout support_simple_spinner_dropdown_item 0x7f0e002b
 +int string abc_action_bar_home_description 0x7f140001
 +int string abc_action_bar_up_description 0x7f140002
 +int string abc_action_menu_overflow_description 0x7f140003
@@ -2993,130 +2873,125 @@ index 0000000..97a5452
 +int style TextAppearance_AppCompat_Widget_TextView_SpinnerItem 0x7f1500f7
 +int style TextAppearance_Compat_Notification 0x7f1500f8
 +int style TextAppearance_Compat_Notification_Info 0x7f1500f9
-+int style TextAppearance_Compat_Notification_Info_Media 0x7f1500fa
-+int style TextAppearance_Compat_Notification_Line2 0x7f1500fb
-+int style TextAppearance_Compat_Notification_Line2_Media 0x7f1500fc
-+int style TextAppearance_Compat_Notification_Media 0x7f1500fd
-+int style TextAppearance_Compat_Notification_Time 0x7f1500fe
-+int style TextAppearance_Compat_Notification_Time_Media 0x7f1500ff
-+int style TextAppearance_Compat_Notification_Title 0x7f150100
-+int style TextAppearance_Compat_Notification_Title_Media 0x7f150101
-+int style TextAppearance_Widget_AppCompat_ExpandedMenu_Item 0x7f150102
-+int style TextAppearance_Widget_AppCompat_Toolbar_Subtitle 0x7f150103
-+int style TextAppearance_Widget_AppCompat_Toolbar_Title 0x7f150104
-+int style Theme 0x7f150105
-+int style ThemeOverlay_AppCompat 0x7f150106
-+int style ThemeOverlay_AppCompat_ActionBar 0x7f150107
-+int style ThemeOverlay_AppCompat_Dark 0x7f150108
-+int style ThemeOverlay_AppCompat_Dark_ActionBar 0x7f150109
-+int style ThemeOverlay_AppCompat_Dialog 0x7f15010a
-+int style ThemeOverlay_AppCompat_Dialog_Alert 0x7f15010b
-+int style ThemeOverlay_AppCompat_Light 0x7f15010c
-+int style Theme_AppCompat 0x7f15010d
-+int style Theme_AppCompat_CompactMenu 0x7f15010e
-+int style Theme_AppCompat_DayNight 0x7f15010f
-+int style Theme_AppCompat_DayNight_DarkActionBar 0x7f150110
-+int style Theme_AppCompat_DayNight_Dialog 0x7f150111
-+int style Theme_AppCompat_DayNight_DialogWhenLarge 0x7f150112
-+int style Theme_AppCompat_DayNight_Dialog_Alert 0x7f150113
-+int style Theme_AppCompat_DayNight_Dialog_MinWidth 0x7f150114
-+int style Theme_AppCompat_DayNight_NoActionBar 0x7f150115
-+int style Theme_AppCompat_Dialog 0x7f150116
-+int style Theme_AppCompat_DialogWhenLarge 0x7f150117
-+int style Theme_AppCompat_Dialog_Alert 0x7f150118
-+int style Theme_AppCompat_Dialog_MinWidth 0x7f150119
-+int style Theme_AppCompat_Light 0x7f15011a
-+int style Theme_AppCompat_Light_DarkActionBar 0x7f15011b
-+int style Theme_AppCompat_Light_Dialog 0x7f15011c
-+int style Theme_AppCompat_Light_DialogWhenLarge 0x7f15011d
-+int style Theme_AppCompat_Light_Dialog_Alert 0x7f15011e
-+int style Theme_AppCompat_Light_Dialog_MinWidth 0x7f15011f
-+int style Theme_AppCompat_Light_NoActionBar 0x7f150120
-+int style Theme_AppCompat_NoActionBar 0x7f150121
-+int style Theme_Catalyst 0x7f150122
-+int style Theme_Catalyst_LogBox 0x7f150123
-+int style Theme_Catalyst_RedBox 0x7f150124
-+int style Theme_FullScreenDialog 0x7f150125
-+int style Theme_FullScreenDialogAnimatedFade 0x7f150126
-+int style Theme_FullScreenDialogAnimatedSlide 0x7f150127
-+int style Theme_ReactNative_AppCompat_Light 0x7f150128
-+int style Theme_ReactNative_AppCompat_Light_NoActionBar_FullScreen 0x7f150129
-+int style Widget_AppCompat_ActionBar 0x7f15012a
-+int style Widget_AppCompat_ActionBar_Solid 0x7f15012b
-+int style Widget_AppCompat_ActionBar_TabBar 0x7f15012c
-+int style Widget_AppCompat_ActionBar_TabText 0x7f15012d
-+int style Widget_AppCompat_ActionBar_TabView 0x7f15012e
-+int style Widget_AppCompat_ActionButton 0x7f15012f
-+int style Widget_AppCompat_ActionButton_CloseMode 0x7f150130
-+int style Widget_AppCompat_ActionButton_Overflow 0x7f150131
-+int style Widget_AppCompat_ActionMode 0x7f150132
-+int style Widget_AppCompat_ActivityChooserView 0x7f150133
-+int style Widget_AppCompat_AutoCompleteTextView 0x7f150134
-+int style Widget_AppCompat_Button 0x7f150135
-+int style Widget_AppCompat_ButtonBar 0x7f150136
-+int style Widget_AppCompat_ButtonBar_AlertDialog 0x7f150137
-+int style Widget_AppCompat_Button_Borderless 0x7f150138
-+int style Widget_AppCompat_Button_Borderless_Colored 0x7f150139
-+int style Widget_AppCompat_Button_ButtonBar_AlertDialog 0x7f15013a
-+int style Widget_AppCompat_Button_Colored 0x7f15013b
-+int style Widget_AppCompat_Button_Small 0x7f15013c
-+int style Widget_AppCompat_CompoundButton_CheckBox 0x7f15013d
-+int style Widget_AppCompat_CompoundButton_RadioButton 0x7f15013e
-+int style Widget_AppCompat_CompoundButton_Switch 0x7f15013f
-+int style Widget_AppCompat_DrawerArrowToggle 0x7f150140
-+int style Widget_AppCompat_DropDownItem_Spinner 0x7f150141
-+int style Widget_AppCompat_EditText 0x7f150142
-+int style Widget_AppCompat_ImageButton 0x7f150143
-+int style Widget_AppCompat_Light_ActionBar 0x7f150144
-+int style Widget_AppCompat_Light_ActionBar_Solid 0x7f150145
-+int style Widget_AppCompat_Light_ActionBar_Solid_Inverse 0x7f150146
-+int style Widget_AppCompat_Light_ActionBar_TabBar 0x7f150147
-+int style Widget_AppCompat_Light_ActionBar_TabBar_Inverse 0x7f150148
-+int style Widget_AppCompat_Light_ActionBar_TabText 0x7f150149
-+int style Widget_AppCompat_Light_ActionBar_TabText_Inverse 0x7f15014a
-+int style Widget_AppCompat_Light_ActionBar_TabView 0x7f15014b
-+int style Widget_AppCompat_Light_ActionBar_TabView_Inverse 0x7f15014c
-+int style Widget_AppCompat_Light_ActionButton 0x7f15014d
-+int style Widget_AppCompat_Light_ActionButton_CloseMode 0x7f15014e
-+int style Widget_AppCompat_Light_ActionButton_Overflow 0x7f15014f
-+int style Widget_AppCompat_Light_ActionMode_Inverse 0x7f150150
-+int style Widget_AppCompat_Light_ActivityChooserView 0x7f150151
-+int style Widget_AppCompat_Light_AutoCompleteTextView 0x7f150152
-+int style Widget_AppCompat_Light_DropDownItem_Spinner 0x7f150153
-+int style Widget_AppCompat_Light_ListPopupWindow 0x7f150154
-+int style Widget_AppCompat_Light_ListView_DropDown 0x7f150155
-+int style Widget_AppCompat_Light_PopupMenu 0x7f150156
-+int style Widget_AppCompat_Light_PopupMenu_Overflow 0x7f150157
-+int style Widget_AppCompat_Light_SearchView 0x7f150158
-+int style Widget_AppCompat_Light_Spinner_DropDown_ActionBar 0x7f150159
-+int style Widget_AppCompat_ListMenuView 0x7f15015a
-+int style Widget_AppCompat_ListPopupWindow 0x7f15015b
-+int style Widget_AppCompat_ListView 0x7f15015c
-+int style Widget_AppCompat_ListView_DropDown 0x7f15015d
-+int style Widget_AppCompat_ListView_Menu 0x7f15015e
-+int style Widget_AppCompat_PopupMenu 0x7f15015f
-+int style Widget_AppCompat_PopupMenu_Overflow 0x7f150160
-+int style Widget_AppCompat_PopupWindow 0x7f150161
-+int style Widget_AppCompat_ProgressBar 0x7f150162
-+int style Widget_AppCompat_ProgressBar_Horizontal 0x7f150163
-+int style Widget_AppCompat_RatingBar 0x7f150164
-+int style Widget_AppCompat_RatingBar_Indicator 0x7f150165
-+int style Widget_AppCompat_RatingBar_Small 0x7f150166
-+int style Widget_AppCompat_SearchView 0x7f150167
-+int style Widget_AppCompat_SearchView_ActionBar 0x7f150168
-+int style Widget_AppCompat_SeekBar 0x7f150169
-+int style Widget_AppCompat_SeekBar_Discrete 0x7f15016a
-+int style Widget_AppCompat_Spinner 0x7f15016b
-+int style Widget_AppCompat_Spinner_DropDown 0x7f15016c
-+int style Widget_AppCompat_Spinner_DropDown_ActionBar 0x7f15016d
-+int style Widget_AppCompat_Spinner_Underlined 0x7f15016e
-+int style Widget_AppCompat_TextView_SpinnerItem 0x7f15016f
-+int style Widget_AppCompat_Toolbar 0x7f150170
-+int style Widget_AppCompat_Toolbar_Button_Navigation 0x7f150171
-+int style Widget_Compat_NotificationActionContainer 0x7f150172
-+int style Widget_Compat_NotificationActionText 0x7f150173
-+int style Widget_Support_CoordinatorLayout 0x7f150174
-+int style redboxButton 0x7f150175
++int style TextAppearance_Compat_Notification_Line2 0x7f1500fa
++int style TextAppearance_Compat_Notification_Time 0x7f1500fb
++int style TextAppearance_Compat_Notification_Title 0x7f1500fc
++int style TextAppearance_Widget_AppCompat_ExpandedMenu_Item 0x7f1500fd
++int style TextAppearance_Widget_AppCompat_Toolbar_Subtitle 0x7f1500fe
++int style TextAppearance_Widget_AppCompat_Toolbar_Title 0x7f1500ff
++int style Theme 0x7f150100
++int style ThemeOverlay_AppCompat 0x7f150101
++int style ThemeOverlay_AppCompat_ActionBar 0x7f150102
++int style ThemeOverlay_AppCompat_Dark 0x7f150103
++int style ThemeOverlay_AppCompat_Dark_ActionBar 0x7f150104
++int style ThemeOverlay_AppCompat_Dialog 0x7f150105
++int style ThemeOverlay_AppCompat_Dialog_Alert 0x7f150106
++int style ThemeOverlay_AppCompat_Light 0x7f150107
++int style Theme_AppCompat 0x7f150108
++int style Theme_AppCompat_CompactMenu 0x7f150109
++int style Theme_AppCompat_DayNight 0x7f15010a
++int style Theme_AppCompat_DayNight_DarkActionBar 0x7f15010b
++int style Theme_AppCompat_DayNight_Dialog 0x7f15010c
++int style Theme_AppCompat_DayNight_DialogWhenLarge 0x7f15010d
++int style Theme_AppCompat_DayNight_Dialog_Alert 0x7f15010e
++int style Theme_AppCompat_DayNight_Dialog_MinWidth 0x7f15010f
++int style Theme_AppCompat_DayNight_NoActionBar 0x7f150110
++int style Theme_AppCompat_Dialog 0x7f150111
++int style Theme_AppCompat_DialogWhenLarge 0x7f150112
++int style Theme_AppCompat_Dialog_Alert 0x7f150113
++int style Theme_AppCompat_Dialog_MinWidth 0x7f150114
++int style Theme_AppCompat_Light 0x7f150115
++int style Theme_AppCompat_Light_DarkActionBar 0x7f150116
++int style Theme_AppCompat_Light_Dialog 0x7f150117
++int style Theme_AppCompat_Light_DialogWhenLarge 0x7f150118
++int style Theme_AppCompat_Light_Dialog_Alert 0x7f150119
++int style Theme_AppCompat_Light_Dialog_MinWidth 0x7f15011a
++int style Theme_AppCompat_Light_NoActionBar 0x7f15011b
++int style Theme_AppCompat_NoActionBar 0x7f15011c
++int style Theme_Catalyst 0x7f15011d
++int style Theme_Catalyst_LogBox 0x7f15011e
++int style Theme_Catalyst_RedBox 0x7f15011f
++int style Theme_FullScreenDialog 0x7f150120
++int style Theme_FullScreenDialogAnimatedFade 0x7f150121
++int style Theme_FullScreenDialogAnimatedSlide 0x7f150122
++int style Theme_ReactNative_AppCompat_Light 0x7f150123
++int style Theme_ReactNative_AppCompat_Light_NoActionBar_FullScreen 0x7f150124
++int style Widget_AppCompat_ActionBar 0x7f150125
++int style Widget_AppCompat_ActionBar_Solid 0x7f150126
++int style Widget_AppCompat_ActionBar_TabBar 0x7f150127
++int style Widget_AppCompat_ActionBar_TabText 0x7f150128
++int style Widget_AppCompat_ActionBar_TabView 0x7f150129
++int style Widget_AppCompat_ActionButton 0x7f15012a
++int style Widget_AppCompat_ActionButton_CloseMode 0x7f15012b
++int style Widget_AppCompat_ActionButton_Overflow 0x7f15012c
++int style Widget_AppCompat_ActionMode 0x7f15012d
++int style Widget_AppCompat_ActivityChooserView 0x7f15012e
++int style Widget_AppCompat_AutoCompleteTextView 0x7f15012f
++int style Widget_AppCompat_Button 0x7f150130
++int style Widget_AppCompat_ButtonBar 0x7f150131
++int style Widget_AppCompat_ButtonBar_AlertDialog 0x7f150132
++int style Widget_AppCompat_Button_Borderless 0x7f150133
++int style Widget_AppCompat_Button_Borderless_Colored 0x7f150134
++int style Widget_AppCompat_Button_ButtonBar_AlertDialog 0x7f150135
++int style Widget_AppCompat_Button_Colored 0x7f150136
++int style Widget_AppCompat_Button_Small 0x7f150137
++int style Widget_AppCompat_CompoundButton_CheckBox 0x7f150138
++int style Widget_AppCompat_CompoundButton_RadioButton 0x7f150139
++int style Widget_AppCompat_CompoundButton_Switch 0x7f15013a
++int style Widget_AppCompat_DrawerArrowToggle 0x7f15013b
++int style Widget_AppCompat_DropDownItem_Spinner 0x7f15013c
++int style Widget_AppCompat_EditText 0x7f15013d
++int style Widget_AppCompat_ImageButton 0x7f15013e
++int style Widget_AppCompat_Light_ActionBar 0x7f15013f
++int style Widget_AppCompat_Light_ActionBar_Solid 0x7f150140
++int style Widget_AppCompat_Light_ActionBar_Solid_Inverse 0x7f150141
++int style Widget_AppCompat_Light_ActionBar_TabBar 0x7f150142
++int style Widget_AppCompat_Light_ActionBar_TabBar_Inverse 0x7f150143
++int style Widget_AppCompat_Light_ActionBar_TabText 0x7f150144
++int style Widget_AppCompat_Light_ActionBar_TabText_Inverse 0x7f150145
++int style Widget_AppCompat_Light_ActionBar_TabView 0x7f150146
++int style Widget_AppCompat_Light_ActionBar_TabView_Inverse 0x7f150147
++int style Widget_AppCompat_Light_ActionButton 0x7f150148
++int style Widget_AppCompat_Light_ActionButton_CloseMode 0x7f150149
++int style Widget_AppCompat_Light_ActionButton_Overflow 0x7f15014a
++int style Widget_AppCompat_Light_ActionMode_Inverse 0x7f15014b
++int style Widget_AppCompat_Light_ActivityChooserView 0x7f15014c
++int style Widget_AppCompat_Light_AutoCompleteTextView 0x7f15014d
++int style Widget_AppCompat_Light_DropDownItem_Spinner 0x7f15014e
++int style Widget_AppCompat_Light_ListPopupWindow 0x7f15014f
++int style Widget_AppCompat_Light_ListView_DropDown 0x7f150150
++int style Widget_AppCompat_Light_PopupMenu 0x7f150151
++int style Widget_AppCompat_Light_PopupMenu_Overflow 0x7f150152
++int style Widget_AppCompat_Light_SearchView 0x7f150153
++int style Widget_AppCompat_Light_Spinner_DropDown_ActionBar 0x7f150154
++int style Widget_AppCompat_ListMenuView 0x7f150155
++int style Widget_AppCompat_ListPopupWindow 0x7f150156
++int style Widget_AppCompat_ListView 0x7f150157
++int style Widget_AppCompat_ListView_DropDown 0x7f150158
++int style Widget_AppCompat_ListView_Menu 0x7f150159
++int style Widget_AppCompat_PopupMenu 0x7f15015a
++int style Widget_AppCompat_PopupMenu_Overflow 0x7f15015b
++int style Widget_AppCompat_PopupWindow 0x7f15015c
++int style Widget_AppCompat_ProgressBar 0x7f15015d
++int style Widget_AppCompat_ProgressBar_Horizontal 0x7f15015e
++int style Widget_AppCompat_RatingBar 0x7f15015f
++int style Widget_AppCompat_RatingBar_Indicator 0x7f150160
++int style Widget_AppCompat_RatingBar_Small 0x7f150161
++int style Widget_AppCompat_SearchView 0x7f150162
++int style Widget_AppCompat_SearchView_ActionBar 0x7f150163
++int style Widget_AppCompat_SeekBar 0x7f150164
++int style Widget_AppCompat_SeekBar_Discrete 0x7f150165
++int style Widget_AppCompat_Spinner 0x7f150166
++int style Widget_AppCompat_Spinner_DropDown 0x7f150167
++int style Widget_AppCompat_Spinner_DropDown_ActionBar 0x7f150168
++int style Widget_AppCompat_Spinner_Underlined 0x7f150169
++int style Widget_AppCompat_TextView_SpinnerItem 0x7f15016a
++int style Widget_AppCompat_Toolbar 0x7f15016b
++int style Widget_AppCompat_Toolbar_Button_Navigation 0x7f15016c
++int style Widget_Compat_NotificationActionContainer 0x7f15016d
++int style Widget_Compat_NotificationActionText 0x7f15016e
++int style Widget_Support_CoordinatorLayout 0x7f15016f
++int style redboxButton 0x7f150170
 +int[] styleable ActionBar { 0x7f040035, 0x7f040037, 0x7f040038, 0x7f04005c, 0x7f04005d, 0x7f04005e, 0x7f04005f, 0x7f040060, 0x7f040061, 0x7f040064, 0x7f040069, 0x7f04006a, 0x7f040075, 0x7f040088, 0x7f040089, 0x7f04008a, 0x7f04008b, 0x7f04008c, 0x7f040091, 0x7f040094, 0x7f0400aa, 0x7f0400b1, 0x7f0400bf, 0x7f0400c6, 0x7f0400c7, 0x7f0400f2, 0x7f0400f5, 0x7f040110, 0x7f040119 }
 +int styleable ActionBar_background 0
 +int styleable ActionBar_backgroundSplit 1
@@ -3639,108 +3514,177 @@ index 0000000..97a5452
 +int styleable ViewStubCompat_android_inflatedId 1
 +int styleable ViewStubCompat_android_layout 2
 +int xml rn_dev_preferences 0x7f180001
-diff --git a/node_modules/react-native-track-player/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json b/node_modules/react-native-track-player/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json
+diff --git a/node_modules/react-native-gesture-handler/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json b/node_modules/react-native-gesture-handler/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json
 new file mode 100644
 index 0000000..49b1382
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json
++++ b/node_modules/react-native-gesture-handler/android/build/intermediates/transforms/mergeJniLibs/debug/__content__.json
 @@ -0,0 +1 @@
 +[{"name":"resources","index":0,"scopes":["PROJECT"],"types":["NATIVE_LIBS"],"format":"DIRECTORY","present":false}]
 \ No newline at end of file
-diff --git a/node_modules/react-native-track-player/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/react-native-track-player/android/build/outputs/logs/manifest-merger-debug-report.txt
+diff --git a/node_modules/react-native-gesture-handler/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/react-native-gesture-handler/android/build/outputs/logs/manifest-merger-debug-report.txt
 new file mode 100644
-index 0000000..24c2fda
+index 0000000..e9c3718
 --- /dev/null
-+++ b/node_modules/react-native-track-player/android/build/outputs/logs/manifest-merger-debug-report.txt
-@@ -0,0 +1,65 @@
++++ b/node_modules/react-native-gesture-handler/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -0,0 +1,37 @@
 +-- Merging decision tree log ---
 +manifest
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
++ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
 +	package
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:3:11-47
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:2:5-49
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
 +	android:versionName
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
 +	android:versionCode
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:1-26:12
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:1-3:12
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
 +	xmlns:android
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:2:11-69
-+uses-permission#android.permission.WAKE_LOCK
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:5:5-68
-+	android:name
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:5:22-65
-+uses-permission#android.permission.FOREGROUND_SERVICE
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:6:5-77
-+	android:name
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:6:22-74
-+application
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:8:5-24:19
-+service#com.guichaguri.trackplayer.service.MusicService
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:11:9-15:19
-+	android:enabled
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:11:55-77
-+	android:exported
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:11:78-101
-+	android:name
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:11:18-54
-+intent-filter#action:name:android.intent.action.MEDIA_BUTTON
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:12:13-14:29
-+action#android.intent.action.MEDIA_BUTTON
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:13:17-77
-+	android:name
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:13:25-74
-+receiver#androidx.media.session.MediaButtonReceiver
-+ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:18:9-22:20
-+	android:name
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml:18:19-76
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml:1:11-69
 +uses-sdk
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
 +	android:targetSdkVersion
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
 +	android:minSdkVersion
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-+		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-track-player/android/src/main/AndroidManifest.xml
-diff --git a/node_modules/react-native-track-player/index.d.ts b/node_modules/react-native-track-player/index.d.ts
-index 69f7e4b..e8504a9 100644
---- a/node_modules/react-native-track-player/index.d.ts
-+++ b/node_modules/react-native-track-player/index.d.ts
-@@ -201,4 +201,21 @@ declare namespace RNTrackPlayer {
-   export const PITCH_ALGORITHM_MUSIC: PitchAlgorithm;
-   export const PITCH_ALGORITHM_VOICE: PitchAlgorithm;
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		ADDED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
++		INJECTED from /home/riih/code/personal/mobile/booker/node_modules/react-native-gesture-handler/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/react-native-gesture-handler/android/lib/src/main/java/com/swmansion/gesturehandler/NativeViewGestureHandler.java b/node_modules/react-native-gesture-handler/android/lib/src/main/java/com/swmansion/gesturehandler/NativeViewGestureHandler.java
+index ca69016..0a38f5b 100644
+--- a/node_modules/react-native-gesture-handler/android/lib/src/main/java/com/swmansion/gesturehandler/NativeViewGestureHandler.java
++++ b/node_modules/react-native-gesture-handler/android/lib/src/main/java/com/swmansion/gesturehandler/NativeViewGestureHandler.java
+@@ -5,6 +5,8 @@ import android.view.MotionEvent;
+ import android.view.View;
+ import android.view.ViewGroup;
  
-+  // Hooks
++import com.swmansion.gesturehandler.react.RNGestureHandlerButtonViewManager;
 +
-+  export function useTrackPlayerEvents(events: Array<EventType>, handler: (payload: any) => void): void;
-+  export function usePlaybackState(): State;
-+  export function useTrackPlayerProgress(interval?: number): {
-+    position: 0,
-+    bufferedPosition: 0,
-+    duration: 0
-+  };
-+  // export function useTrackPlayerProgress(interval?: number): [
-+  //   {
-+  //     progress: number,
-+  //     bufferedPosition: number,
-+  //     duration: number
-+  //   },
-+  //   (interval: number) => void
-+  // ];
- }
+ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHandler> {
+ 
+   private boolean mShouldActivateOnStart;
+@@ -34,6 +36,18 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
+     return super.shouldRequireToWaitForFailure(handler);
+   }
+ 
++  private boolean isPreventedFromBeginning() {
++    // RNGestureHandlerButtonViewManager is connected with logic
++    // related to handling exclusive touches which should prevent
++    // another buttons from beginning gesture recognition.
++    View view = getView();
++    if (view instanceof RNGestureHandlerButtonViewManager.ButtonViewGroup) {
++      // setting flag for an exclusive touch for buttons
++      return !((RNGestureHandlerButtonViewManager.ButtonViewGroup) view).setResponder();
++    }
++    return false;
++  }
++
+   @Override
+   public boolean shouldRecognizeSimultaneously(GestureHandler handler) {
+     if (handler instanceof NativeViewGestureHandler) {
+@@ -53,7 +67,7 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
+     int otherState = handler.getState();
+ 
+     if (state == STATE_ACTIVE && otherState == STATE_ACTIVE && canBeInterrupted) {
+-      // if both handlers are active and the current handler can be interruped it we return `false`
++      // if both handlers are active and the current handler can be interrupted it we return `false`
+       // as it means the other handler has turned active and returning `true` would prevent it from
+       // interrupting the current handler
+       return false;
+@@ -85,8 +99,9 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
+       } else if (tryIntercept(view, event)) {
+         view.onTouchEvent(event);
+         activate();
+-      } else if (state != STATE_BEGAN) {
++      } else if (state != STATE_BEGAN && !isPreventedFromBeginning()) {
+         begin();
++
+       }
+     } else if (state == STATE_ACTIVE) {
+       view.onTouchEvent(event);
+diff --git a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.java b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.java
+index fd625bd..c44aff2 100644
+--- a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.java
++++ b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/react/RNGestureHandlerButtonViewManager.java
+@@ -21,7 +21,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
+ public class RNGestureHandlerButtonViewManager extends
+         ViewGroupManager<RNGestureHandlerButtonViewManager.ButtonViewGroup> {
+ 
+-  static class ButtonViewGroup extends ViewGroup {
++  public static class ButtonViewGroup extends ViewGroup {
+ 
+     static TypedValue sResolveOutValue = new TypedValue();
+     static ButtonViewGroup sResponder;
+@@ -32,6 +32,7 @@ public class RNGestureHandlerButtonViewManager extends
+     boolean mUseForeground = false;
+     boolean mUseBorderless = false;
+     float mBorderRadius = 0;
++    private boolean mExclusive = true;
+     boolean mNeedBackgroundUpdate = false;
+ 
+ 
+@@ -50,6 +51,10 @@ public class RNGestureHandlerButtonViewManager extends
+       mNeedBackgroundUpdate = true;
+     }
+ 
++    public void setExclusive(boolean exclusive) {
++      mExclusive = exclusive;
++    }
++
+     public void setRippleColor(Integer color) {
+       mRippleColor = color;
+       mNeedBackgroundUpdate = true;
+@@ -167,14 +172,20 @@ public class RNGestureHandlerButtonViewManager extends
+       }
+     }
+ 
++    public boolean setResponder() {
++      if (sResponder == null) {
++        if (mExclusive) {
++          sResponder = this;
++        }
++        return true;
++      }
++      return false;
++    }
++
+     @Override
+     public void setPressed(boolean pressed) {
+-      if (pressed && sResponder == null) {
+-        // first button to be pressed grabs button responder
+-        sResponder = this;
+-      }
+-      if (!pressed || sResponder == this) {
+-        // we set pressed state only for current responder
++      if (!pressed || sResponder == this || (sResponder == null && !mExclusive)) {
++        // we set pressed state only for current responder if exclusive
+         super.setPressed(pressed);
+       }
+       if (!pressed && sResponder == this) {
+@@ -225,6 +236,11 @@ public class RNGestureHandlerButtonViewManager extends
+     view.setRippleColor(rippleColor);
+   }
+ 
++  @ReactProp(name = "exclusive", defaultBoolean = true)
++  public void setExclusive(ButtonViewGroup view, boolean exclusive) {
++    view.setExclusive(exclusive);
++  }
++
+   @Override
+   protected void onAfterUpdateTransaction(ButtonViewGroup view) {
+     view.updateBackground();
