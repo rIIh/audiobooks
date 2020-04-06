@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:release": "react-native run-android --variant release",
     "android:clear": "(cd android; ./gradlew clean)",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -49,6 +50,7 @@
     "styled-components": "^5.0.1",
     "typesafe-actions": "^5.1.0",
     "unstated": "^2.1.1",
+    "unstated-next": "^1.1.0",
     "use-async-effect": "^2.2.2"
   },
   "devDependencies": {
@@ -69,6 +71,7 @@
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
     "babel-jest": "^24.9.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",

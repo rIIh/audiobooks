@@ -78,6 +78,7 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
   const {show: showActionSheet} = useActionSheet();
   const [progress, setProgress] = useState(0);
   const [state, setState] = useState<State>(State.Loading);
+  useEffect(() => console.log(book?.title, State[state]), [state]);
   const size = useAsyncMemo(async () => {
     if (!book) { return null; }
     try {
@@ -226,9 +227,6 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
                   });
                 }
               })
-              .begin(() => Toast.show({
-                text: `Download started: ${task.id}`,
-              }))
               .resume();
           });
         } else if (downloads.pending.get(task.id)) {
@@ -242,9 +240,6 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
                 })
                 .done(resolve)
                 .error(reject)
-                .begin(() => Toast.show({
-                  text: `Download started: ${task.id}`,
-                }))
                 .resume();
             });
           } else {

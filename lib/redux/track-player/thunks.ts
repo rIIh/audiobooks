@@ -26,6 +26,7 @@ export const TrackPlayerThunks = {
   toggle: (): ThunkAction<any, ApplicationState, any, ActionType<typeof TrackPlayerActions>> => {
     return async (dispatch, getState) => {
       const currentState = getState().trackPlayer.playbackState;
+      console.log('Toggling player');
       dispatch(
         TrackPlayerActions.setState(
           currentState == PlayerState.Playing

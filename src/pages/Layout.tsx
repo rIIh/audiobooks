@@ -1,17 +1,16 @@
-import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
-import {Alert, Dimensions, Platform, StatusBar, TextInput, TextInputBase, View} from "react-native";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {Alert, StatusBar, TextInput, View} from "react-native";
 import { useClipboard } from '@react-native-community/hooks'
 import {
-  Body,
   Button,
   Container,
   Content,
   Text,
   Icon,
   Toast,
-  Textarea, Input, Label, Item, Spinner, Card, InputGroup,
+  Input, Item, Spinner, InputGroup,
 } from "native-base";
-import {BookObject, BookParser, URLConstraints, useBookParser} from "../components/BookParser";
+import {BookObject, URLConstraints, useBookParser} from "../components/BookParser";
 import Book from "../../model/Book";
 import {useObservable} from "rxjs-hooks";
 import {useDatabase} from "@nozbe/watermelondb/hooks";
@@ -20,19 +19,12 @@ import { Dialog } from '../components/Dialog';
 import Chapter from "../../model/Chapter";
 import {BookCard} from "../components/BookCard";
 import {hmsParse} from "../../lib/hmsParser";
-import {Player} from "../components/Player";
+import {MiniPlayerSheet, PlayerSheet} from "../components/Player";
+import {BOTTOM_BAR_HEIGHT} from "../../lib/layout/constants";
+import FeatherIcon from "../../lib/feather1s-extended";
+import {Books} from "../state/Books";
 
-const BookView: React.FC<{ bookRef: Book }> = ({ bookRef }) => {
-  const book = useObservable(() => bookRef.observe());
-  const chapters = useObservable(() => bookRef.chapters.observe());
-  // @ts-ignore
-  return <View>
-    <Text>{book?.title ?? 'undefined'}</Text>
-    <Text>{chapters?.length ?? 'undefined'}</Text>
-  </View>;
-};
-
-const hashCode = (s: string) => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)
+const hashCode = (s: string) => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
 
 const log = (data: any) => {
   console.log(data);
@@ -84,14 +76,6 @@ const CustomizedHeader = () => {
   const chaptersCollection = database.collections.get<Chapter>(Chapter.table);
   const [modal, setModal] = useState(false);
 
-  const clear = useCallback(() => {
-    Alert.alert('Are you sure', undefined, [{text: 'No'}, {text: 'Yes', onPress: () => {
-        database.action(async () => {
-          database.unsafeResetDatabase();
-        })
-      }}]);
-  }, []);
-
   const createBook = useCallback((bookData: BookObject) => {
     log(bookData);
     database.action(async () => {
@@ -129,7 +113,7 @@ const CustomizedHeader = () => {
   const addURL = useCallback(async (url) => {
     try {
       const result = await bookParser.parseBook(url);
-      Toast.show({ type: "success", text: result.title })
+      Toast.show({ type: "success", text: result.title });
       createBook(result);
     } catch (reason) {
       Toast.show({ type: "danger", text: typeof reason === "string" ? reason : reason.message })
@@ -153,22 +137,28 @@ const CustomizedHeader = () => {
 };
 
 export const Layout: React.FC = () => {
-  const database = useDatabase();
-  const booksCollection = database.collections.get<Book>(Book.table);
-  const books = useObservable(() => booksCollection.query().observe());
   const bookParser = useBookParser();
+  const { books } = Books.useContainer();
 
   return <>
     <StatusBar backgroundColor="#E8ECEF" barStyle="dark-content" />
     <Container>
       <CustomizedHeader/>
       <Content style={{ backgroundColor: '#f1f5f8' }}>
-        { bookParser.isProcessing && <Spinner/> }
         {
           books?.map(book => <BookCard key={book.id} _book={book}/>)
         }
+        { bookParser.isProcessing && <Spinner/> }
       </Content>
+      <MiniPlayerSheet/>
+      <View style={{ height: BOTTOM_BAR_HEIGHT, width: '100%', backgroundColor: 'white', elevation: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+        <FeatherIcon name="home" size={24}/>
+        <FeatherIcon name="home" size={24}/>
+        <FeatherIcon name="home" size={24}/>
+        <FeatherIcon name="home" size={24}/>
+      </View>
     </Container>
-    <Player/>
+    <PlayerSheet/>
+    {/*<Player/>*/}
   </>
 };

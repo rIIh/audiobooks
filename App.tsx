@@ -25,6 +25,12 @@ import { Provider } from 'react-redux';
 import { rootReducer } from './lib/redux';
 import thunk from 'redux-thunk';
 import migrations from './model/migrations';
+import { BackHandler } from 'react-native';
+import { VideoSource } from './src/components/Player';
+import { Playback } from './src/state/PlayerState';
+import { Books } from './src/state/Books';
+
+BackHandler.addEventListener('hardwareBackPress', () => {});
 
 const adapter = new SQLiteAdapter({
   schema,
@@ -47,7 +53,12 @@ const App = () => {
           <BookParser>
             <Downloads>
               <ActionSheetProvider>
-                <Layout />
+                <Playback.Provider>
+                  <Books.Provider>
+                    <VideoSource />
+                    <Layout />
+                  </Books.Provider>
+                </Playback.Provider>
               </ActionSheetProvider>
             </Downloads>
           </BookParser>

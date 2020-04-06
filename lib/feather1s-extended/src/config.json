@@ -1,0 +1,24 @@
+{
+  "name": "feather1s-extended",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "597e95a81ad0add789b1a3e52ef9c018",
+      "css": "bookmark-filled",
+      "code": 59392,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M520.8 671.4L241.3 871.1C227.5 881 208.3 871.1 208.3 854.2V187.5C208.3 130 255 83.3 312.5 83.3H729.2C786.7 83.3 833.3 130 833.3 187.5V854.2C833.3 871.1 814.2 881 800.4 871.1Z",
+        "width": 1000
+      },
+      "search": [
+        "bookmark-filled"
+      ]
+    }
+  ]
+}

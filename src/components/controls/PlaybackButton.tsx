@@ -11,6 +11,7 @@ export const PlaybackButton: React.FC<{ book: Book }> = ({ book }) => {
   const dispatch = useDispatch();
   const playerState = useTypedSelector(state => state.trackPlayer);
   const activeBook = useMemo(() => playerState.activeBook != null && playerState.activeBook.id == book?.id, [playerState.activeBook, book]);
+  console.log(activeBook);
   const loadBook = useCallback(() => dispatch(TrackPlayerThunks.loadBook(book, 0)), [book]);
   const toggle = useCallback(() => activeBook && dispatch(TrackPlayerThunks.toggle()), [book]);
 
