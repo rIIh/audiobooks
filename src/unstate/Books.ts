@@ -1,4 +1,3 @@
-import { DownloadTask } from 'react-native-background-downloader';
 import Book from '../../model/Book';
 import { useDatabase } from '@nozbe/watermelondb/hooks';
 import { useObservable } from 'rxjs-hooks';
@@ -7,7 +6,6 @@ import { createContainer } from 'unstated-next';
 export interface Books {
   data: {
     books: Books[];
-    downloads: Map<Book, { [key: string]: DownloadTask }>;
   };
 }
 

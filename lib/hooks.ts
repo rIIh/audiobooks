@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useState } from 'react';
+import {DependencyList, EffectCallback, useEffect, useRef, useState} from 'react';
 
 export const useMergeState = <T>(initialValue: T): [T, (newValue: Partial<T>) => void] => {
   const [state, setState] = useState<T>(initialValue);
@@ -30,4 +30,16 @@ export function useAsyncMemo<T>(factory: () => Promise<T | undefined | null>, de
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
   return val;
+}
+
+export function usePostEffect(cb: EffectCallback, deps?: DependencyList) {
+  const initial = useRef(false);
+  useEffect(() => {
+    if (!initial.current) {
+      initial.current = true;
+    } else {
+      cb();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 }

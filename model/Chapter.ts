@@ -2,6 +2,7 @@ import { Model, Relation } from '@nozbe/watermelondb';
 import field from '@nozbe/watermelondb/decorators/field';
 import { relation } from '@nozbe/watermelondb/decorators';
 import Book from './Book';
+
 export default class Chapter extends Model {
   static table = 'chapters';
   static associations = {

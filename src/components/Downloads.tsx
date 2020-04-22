@@ -1,13 +1,6 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Map } from 'immutable';
-import RNBackgroundDownloader, {
-  DownloadTask,
-} from 'react-native-background-downloader';
+import RNBackgroundDownloader, { DownloadTask } from 'react-native-background-downloader';
 
 interface IDownloadContext {
   pending: Map<string, DownloadTask>;
@@ -22,9 +15,7 @@ export const Downloads: React.FC = ({ children }) => {
   useEffect(() => {
     RNBackgroundDownloader.checkForExistingDownloads().then(tasks => {
       setPending(Map(tasks.map(task => [task.id, task])));
-      tasks.forEach(task =>
-        task.done(() => setPending(last => last.remove(task.id))),
-      );
+      tasks.forEach(task => task.done(() => setPending(last => last.remove(task.id))));
     });
   }, []);
 

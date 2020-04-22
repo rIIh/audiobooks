@@ -1,23 +1,22 @@
 import {CircleButton} from '../CircleButton';
 import {Icon} from 'native-base';
 import React, {useCallback, useMemo} from 'react';
-import {TrackPlayerThunks} from '../../../lib/redux/track-player/thunks';
-import {useDispatch} from 'react-redux';
 import Book from '../../../model/Book';
-import {useTypedSelector} from "../../../lib/redux";
 import {PlayerState} from "../../../lib/track-player";
+import {Playback} from "../../unstate/Playback";
 
 export const PlaybackButton: React.FC<{ book: Book }> = ({ book }) => {
-  const dispatch = useDispatch();
-  const playerState = useTypedSelector(state => state.trackPlayer);
-  const activeBook = useMemo(() => playerState.activeBook != null && playerState.activeBook.id == book?.id, [playerState.activeBook, book]);
-  console.log(activeBook);
-  const loadBook = useCallback(() => dispatch(TrackPlayerThunks.loadBook(book, 0)), [book]);
-  const toggle = useCallback(() => activeBook && dispatch(TrackPlayerThunks.toggle()), [book]);
+  const { currentState: { book: currentBook }, dataSource: { state: playbackState }, methods: { toggle: _toggle, openBook } } = Playback.useContainer();
+  const isActive = book && currentBook?.id == book.id;
+  const loadBook = useCallback(() => openBook(book), [book, openBook]);
+  const toggle = useCallback(() => {
+    isActive && _toggle();
+    console.log('Toggled', isActive, currentBook?.title, book.title);
+  }, [book, _toggle, currentBook, book]);
 
   return (
-    <CircleButton onPress={activeBook ? toggle : loadBook}>
-      <Icon type="FontAwesome5" name={playerState.playbackState == PlayerState.Playing && activeBook ? 'pause' : 'play'} style={{ fontSize: 12 }} />
+    <CircleButton onPress={isActive ? toggle : loadBook} style={{ borderColor: isActive ? 'white' : undefined}}>
+      <Icon type="FontAwesome5" name={playbackState == PlayerState.Playing && isActive ? 'pause' : 'play'} style={{ fontSize: 12, color: isActive ? 'white' : undefined }} />
     </CircleButton>
   );
 };

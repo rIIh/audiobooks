@@ -3572,16 +3572,16 @@ index ca69016..0a38f5b 100644
 @@ -5,6 +5,8 @@ import android.view.MotionEvent;
  import android.view.View;
  import android.view.ViewGroup;
- 
+
 +import com.swmansion.gesturehandler.react.RNGestureHandlerButtonViewManager;
 +
  public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHandler> {
- 
+
    private boolean mShouldActivateOnStart;
 @@ -34,6 +36,18 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
      return super.shouldRequireToWaitForFailure(handler);
    }
- 
+
 +  private boolean isPreventedFromBeginning() {
 +    // RNGestureHandlerButtonViewManager is connected with logic
 +    // related to handling exclusive touches which should prevent
@@ -3599,7 +3599,7 @@ index ca69016..0a38f5b 100644
      if (handler instanceof NativeViewGestureHandler) {
 @@ -53,7 +67,7 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
      int otherState = handler.getState();
- 
+
      if (state == STATE_ACTIVE && otherState == STATE_ACTIVE && canBeInterrupted) {
 -      // if both handlers are active and the current handler can be interruped it we return `false`
 +      // if both handlers are active and the current handler can be interrupted it we return `false`
@@ -3624,10 +3624,10 @@ index fd625bd..c44aff2 100644
 @@ -21,7 +21,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
  public class RNGestureHandlerButtonViewManager extends
          ViewGroupManager<RNGestureHandlerButtonViewManager.ButtonViewGroup> {
- 
+
 -  static class ButtonViewGroup extends ViewGroup {
 +  public static class ButtonViewGroup extends ViewGroup {
- 
+
      static TypedValue sResolveOutValue = new TypedValue();
      static ButtonViewGroup sResponder;
 @@ -32,6 +32,7 @@ public class RNGestureHandlerButtonViewManager extends
@@ -3636,12 +3636,12 @@ index fd625bd..c44aff2 100644
      float mBorderRadius = 0;
 +    private boolean mExclusive = true;
      boolean mNeedBackgroundUpdate = false;
- 
- 
+
+
 @@ -50,6 +51,10 @@ public class RNGestureHandlerButtonViewManager extends
        mNeedBackgroundUpdate = true;
      }
- 
+
 +    public void setExclusive(boolean exclusive) {
 +      mExclusive = exclusive;
 +    }
@@ -3652,7 +3652,7 @@ index fd625bd..c44aff2 100644
 @@ -167,14 +172,20 @@ public class RNGestureHandlerButtonViewManager extends
        }
      }
- 
+
 +    public boolean setResponder() {
 +      if (sResponder == null) {
 +        if (mExclusive) {
@@ -3679,7 +3679,7 @@ index fd625bd..c44aff2 100644
 @@ -225,6 +236,11 @@ public class RNGestureHandlerButtonViewManager extends
      view.setRippleColor(rippleColor);
    }
- 
+
 +  @ReactProp(name = "exclusive", defaultBoolean = true)
 +  public void setExclusive(ButtonViewGroup view, boolean exclusive) {
 +    view.setExclusive(exclusive);

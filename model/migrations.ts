@@ -1,5 +1,6 @@
-import { addColumns, schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
+import { addColumns, schemaMigrations, createTable } from '@nozbe/watermelondb/Schema/migrations';
 import Chapter from './Chapter';
+import FilePath from "./FilePath";
 
 export default schemaMigrations({
   migrations: [
@@ -28,6 +29,20 @@ export default schemaMigrations({
               name: 'progress',
               type: 'number',
             },
+          ],
+        }),
+      ],
+    },
+    {
+      toVersion: 4,
+      steps: [
+        createTable({
+          name: FilePath.table,
+          columns: [
+            { name: 'book_id', type: 'string' },
+            { name: 'path', type: 'string' },
+            { name: 'url', type: 'string' },
+            { name: 'remote_size', type: 'number', isOptional: true },
           ],
         }),
       ],

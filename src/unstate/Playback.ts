@@ -3,15 +3,14 @@ import {PlayerState} from "../../lib/track-player";
 import Chapter from "../../model/Chapter";
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Book from "../../model/Book";
-import {useDispatch} from "react-redux";
-import {useTypedSelector} from "../../lib/redux";
-import {TrackPlayerThunks} from "../../lib/redux/track-player/thunks";
 import {useAsyncMemo} from "../../lib/hooks";
 import {Platform} from "react-native";
 import RNFS from "react-native-fs";
 import RNBackgroundDownloader from "react-native-background-downloader";
 import {useDatabase} from "@nozbe/watermelondb/hooks";
 import {createContainer} from "unstated-next";
+import {sortBy} from "sort-by-typescript";
+import sum from "../../lib/sum";
 
 export type ProgressUpdate = (data: Partial<OnProgressData>) => void;
 
@@ -37,6 +36,7 @@ export interface PlayingBookState {
     progress: number;
   };
   methods: {
+    openBook: (book: Book, autoPlay?: boolean) => void;
     toggle: () => void;
     drop: () => void;
     jump: (position: number) => void;
@@ -48,24 +48,33 @@ export interface PlayingBookState {
   };
 }
 
+const TOLERANCE = 0.01;
+
 const useBookPlayback = (): PlayingBookState => {
-  const dispatch = useDispatch();
-  const {activeBook, playbackState} = useTypedSelector(state => state.trackPlayer);
+  const [currentBook, setCurrentBook] = useState<Book | null>(null);
+  const [playbackState, setPlaybackState] = useState<PlayerState>(PlayerState.None);
   const [playerOpened, setPlayerOpened] = useState(false);
   const player = useRef<Video>(null);
   const interactionState = useState(true);
   useEffect(() => {
-    if (activeBook == null) {
+    if (currentBook == null) {
       setPlayerOpened(false);
     }
-  }, [activeBook]);
-  const drop = useCallback(() => dispatch(TrackPlayerThunks.dropBook()), [dispatch]);
-  const toggle = useCallback(() => dispatch(TrackPlayerThunks.toggle()), [dispatch]);
-  const chapters = useAsyncMemo(async () => await activeBook?.chapters.fetch(), [activeBook], null);
+  }, [currentBook]);
+  const drop = useCallback(() => setCurrentBook(null), []);
+  const toggle = useCallback(() => {
+    setPlaybackState(last => last == PlayerState.Playing
+      ? PlayerState.Paused
+      : last == PlayerState.Paused
+        ? PlayerState.Playing
+        : PlayerState.Stopped);
+  }, []);
+  const chapters = useAsyncMemo(async () => await currentBook?.chapters.fetch(), [currentBook], null);
   const files = useAsyncMemo(async () => {
     if (Platform.OS == "android") {
       try {
-        return await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${activeBook?.id}`);
+        return (await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${currentBook?.id}`))
+          .sort(sortBy('name'));
       } catch (e) {
 
       }
@@ -73,26 +82,8 @@ const useBookPlayback = (): PlayingBookState => {
     } else {
       return [];
     }
-  }, [activeBook], []);
+  }, [currentBook], []);
   const [currentFile, setCurrentFile] = useState(0);
-  const [moveToLastChapter, setMoveToLastChapter] = useState(false);
-  // useEffect(() => {
-  //   if (!playerBusy && moveToLastChapter) {
-  //     setMoveToLastChapter(false);
-  //     const currentChunk = map?.[currentFile] ?? [];
-  //     if (currentChunk.length > 0) {
-  //       let index = 0;
-  //       player?.seek(currentChunk.map(chapter => chapter.duration).reduce((acc, val) => {
-  //         if (currentChunk[index].id == currentChunk[currentChunk.length - 2].id) {
-  //           return acc;
-  //         } else {
-  //           index++;
-  //           return acc + val;
-  //         }
-  //       }))
-  //     }
-  //   }
-  // });
 
   const db = useDatabase();
   const completeChapter = (threshold: number = 0.95) => {
@@ -129,7 +120,7 @@ const useBookPlayback = (): PlayingBookState => {
   }, [chapters]);
 
   const [currentChapter, chapterPosition] = useMemo<[Chapter | null, number | null]>(() => {
-    if (!map || !chapters || !activeBook) {
+    if (!map || !chapters || !currentBook) {
       return [null, null];
     }
     const currentTime = fileProgress?.currentTime ?? 0;
@@ -179,7 +170,7 @@ const useBookPlayback = (): PlayingBookState => {
       setInteractionState: interactionState[1],
     },
     currentState: {
-      book: activeBook,
+      book: currentBook,
       chapter: currentChapter,
       position: chapterPosition ?? 0,
       duration: currentChapter?.duration ?? 0,
@@ -194,6 +185,14 @@ const useBookPlayback = (): PlayingBookState => {
       switchPlayer: (state) => {
         setPlayerOpened(state);
       },
+      openBook: (book, autoPlay = true) => {
+        setCurrentBook(book);
+        if (autoPlay) {
+          setPlaybackState(PlayerState.Playing);
+        } else {
+          setPlaybackState(PlayerState.Paused);
+        }
+      },
       changeChapter: chapter => {
 
       },
@@ -205,15 +204,29 @@ const useBookPlayback = (): PlayingBookState => {
         player.current?.seek(newPosition);
       },
       previous: () => {
-        if (chapterPosition && currentChapter && map && currentChapter != map[currentFile][0]) {
-          const position = fileProgress!.currentTime - chapterPosition
-            - map[currentFile][Math.max(0, map[currentFile].indexOf(currentChapter) - 1)].duration + 0.1;
-          player.current?.seek(position);
+        if (chapterPosition && currentChapter && map) {
+          if (currentChapter != map[currentFile][0]) {
+            const position = fileProgress!.currentTime - chapterPosition
+              - map[currentFile][Math.max(0, map[currentFile].indexOf(currentChapter) - 1)].duration + TOLERANCE;
+            player.current?.seek(position);
+          } else if (currentFile > 0) {
+            setCurrentFile(currentFile - 1);
+            const chapters = map[currentFile - 1];
+            if (chapters) {
+              setTimeout(() => player.current?.seek(chapters.map(chapter => chapter.duration).reduce(sum) - chapters[chapters.length - 1].duration + TOLERANCE), 125)
+            }
+          }
         }
       },
       next: () => {
-        if (fileProgress && chapterPosition && currentChapter) {
-          player.current?.seek(fileProgress!.currentTime - chapterPosition + currentChapter.duration + 0.1);
+        if (fileProgress && chapterPosition && currentChapter && map) {
+          const chapters = map[currentFile];
+          if (currentChapter == chapters[chapters.length - 1] && currentFile != files.length - 1) {
+            player.current?.seek(0);
+            setCurrentFile(currentFile + 1);
+          } else {
+            player.current?.seek(fileProgress!.currentTime - chapterPosition + currentChapter.duration + TOLERANCE);
+          }
         }
       },
     },

@@ -9,6 +9,7 @@
  */
 
 import React from 'react';
+import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { Database } from '@nozbe/watermelondb';
 import schema from './model/schema';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
@@ -17,18 +18,19 @@ import Book from './model/Book';
 import Chapter from './model/Chapter';
 import { BookParser } from './src/components/BookParser';
 import { Layout } from './src/pages/Layout';
-import { Root } from 'native-base';
-import { Downloads } from './src/components/Downloads';
+import { Root, StyleProvider, Text } from 'native-base';
+import Downloads from './src/unstate/Downloads';
 import { ActionSheetProvider } from './src/components/ActionSheet';
-import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { rootReducer } from './lib/redux';
-import thunk from 'redux-thunk';
 import migrations from './model/migrations';
 import { BackHandler } from 'react-native';
-import { VideoSource } from './src/components/Player';
-import { Playback } from './src/state/PlayerState';
-import { Books } from './src/state/Books';
+import { VideoSource } from './src/components/BookSheet';
+import { Playback } from './src/unstate/Playback';
+import { Books } from './src/unstate/Books';
+import compose from './src/unstate/compose';
+import FilePath from './model/FilePath';
+import { Chapters } from './src/pages/Chapters';
+import { DebugView } from './src/components/DebugView';
+import getTheme from './native-base-theme/components';
 
 BackHandler.addEventListener('hardwareBackPress', () => {});
 
@@ -39,32 +41,42 @@ const adapter = new SQLiteAdapter({
 
 const database = new Database({
   adapter,
-  modelClasses: [Book, Chapter],
+  modelClasses: [Book, Chapter, FilePath],
   actionsEnabled: true,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const NoMatch = () => <Text>No match</Text>;
 
 const App = () => {
+  const Store = compose(
+    Books,
+    Downloads,
+    Playback,
+  );
   return (
-    <Provider store={store}>
+    <StyleProvider style={getTheme()}>
       <Root>
         <DatabaseProvider database={database}>
           <BookParser>
-            <Downloads>
-              <ActionSheetProvider>
-                <Playback.Provider>
-                  <Books.Provider>
-                    <VideoSource />
-                    <Layout />
-                  </Books.Provider>
-                </Playback.Provider>
-              </ActionSheetProvider>
-            </Downloads>
+            <ActionSheetProvider>
+              <Store.Provider>
+                <VideoSource />
+                <NativeRouter>
+                  <BackButton />
+                  <Switch>
+                    <Route exact path="/" component={Layout} />
+                    <Route path="/:book/chapters" component={Chapters} />
+                    <Route component={NoMatch} />
+                  </Switch>
+                  <DebugView />
+                </NativeRouter>
+                {/*<Layout />*/}
+              </Store.Provider>
+            </ActionSheetProvider>
           </BookParser>
         </DatabaseProvider>
       </Root>
-    </Provider>
+    </StyleProvider>
   );
 };
 

@@ -1,60 +1,80 @@
-import React, {ReactNode, useCallback, useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import Book from "../../model/Book";
 import {useObservable} from "rxjs-hooks";
-import {ImageBackground, ImageSourcePropType, Platform,} from "react-native";
-import {Button, Icon, Thumbnail, Toast, View} from "native-base";
-import RNBackgroundDownloader, {DownloadTask} from 'react-native-background-downloader';
+import {ImageBackground, ImageSourcePropType, TouchableWithoutFeedback,} from "react-native";
+import {Button, Icon, Thumbnail, Toast} from "native-base";
+import RNBackgroundDownloader from 'react-native-background-downloader';
 import styled from "styled-components/native";
 import * as Progress from 'react-native-progress';
-import {asyncForEach} from "../../lib/asyncForEach";
+import {syncForEach} from "../../lib/asyncForEach";
 import RNFS from 'react-native-fs';
-import useAsyncEffect from "use-async-effect";
-import {useDownloads} from "./Downloads";
 import {useActionSheet} from "./ActionSheet";
 import {CircleButton} from "./CircleButton";
-import {PlaybackButton} from "./controls/PlaybackButton";
 import {useAsyncMemo} from "../../lib/hooks";
-import prettyBytes from "pretty-bytes";
 import {useDatabase} from "@nozbe/watermelondb/hooks";
 import {prettyTime} from "../../lib/hmsParser";
+import {Playback} from "../unstate/Playback";
+import Downloads, {Failed} from "../unstate/Downloads";
+import {combineLatest, noop} from "rxjs";
+import sum from "../../lib/sum";
+import {map, startWith} from "rxjs/operators";
+import {useBookState} from "../state/BookState";
+import {PlayerState} from "../../lib/track-player";
+import FeatherIcon from "../../lib/feather1s-extended";
+import {DownloadTask} from "../../lib/downloader";
+import {Colors} from "../../lib/colors";
+import { useHistory } from 'react-router-native';
+import {TouchableNativeFeedback, TouchableOpacity} from "react-native-gesture-handler";
 
 const Container = styled.View`
-  margin: 24px;
-  display: flex;
+  margin: 16px;
+  padding: 12px;
   flex-flow: row nowrap;
   align-items: center;
 `;
 
-export const Thumb: React.FC<{ source: ImageSourcePropType, height?: number | string }> = ({ height, ...props }) => <ImageBackground
+export const Thumb: React.FC<{ source: ImageSourcePropType, height?: number | string, aspectRatio?: number }> =
+  ({height, aspectRatio = 9 / 14, ...props}) => <ImageBackground
   source={{uri: 'https://via.placeholder.com/150'}}
   {...props}
   blurRadius={2}
   style={{
-    aspectRatio: 9 / 14,
+    aspectRatio: aspectRatio,
     alignItems: 'center',
     height: height ?? 100,
     overflow: 'hidden',
     borderRadius: 8,
     justifyContent: 'center'
   }}>
-  <Thumbnail source={{uri: 'https://via.placeholder.com/150'}} {...props} resizeMode="contain" square style={{ width: '100%', height: '100%', overflow: 'hidden' }}/>
+  <Thumbnail source={{uri: 'https://via.placeholder.com/150'}} {...props} resizeMode="contain" square style={{width: '100%', height: '100%', overflow: 'hidden'}}/>
 </ImageBackground>;
 
 const Meta = styled.View`
   padding: 0 12px;
-  align-self: stretch;
+  justify-content: center;
+  overflow: hidden;
+  flex: 1;
 `;
 
 const Right = styled.View`
   margin-left: auto;
 `;
 
-const Title = styled.Text`
-  font-size: 18px;
+const InvertibleText = styled.Text<{ inverted?: boolean, dark?: string, light?: string }>`
+  color: ${props => props.inverted ? (props.dark ?? 'white') : (props.light ?? 'black')};
+  margin-bottom: 4px;
 `;
 
-const Subtitle = styled.Text`
-  font-size: 14px;
+const Title = styled(InvertibleText)`
+  font-size: 16px;
+`;
+
+// @ts-ignore
+const Subtitle = styled(InvertibleText).attrs<{ dark?: string, light?: string }>(props => {
+  props.light = 'grey';
+  props.dark = '#efefef';
+})`
+  font-size: 12px;
   font-weight: 100;
 `;
 
@@ -69,84 +89,125 @@ enum State {
   Destroying,
 }
 
-export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
-  const book = useObservable(() => _book.observe());
-  const chapters = useObservable(() => _book.chapters.observe());
-  const database = useDatabase();
-  const links = useMemo(() => [...new Set(chapters?.map(chapter => chapter.downloadURL))], [chapters]);
-  const downloads = useDownloads();
-  const {show: showActionSheet} = useActionSheet();
-  const [progress, setProgress] = useState(0);
-  const [state, setState] = useState<State>(State.Loading);
-  useEffect(() => console.log(book?.title, State[state]), [state]);
-  const size = useAsyncMemo(async () => {
-    if (!book) { return null; }
+export const BookCard: React.FC<{ _book: Book }> = ({_book: bookRef}) => {
+  const book = useObservable(() => bookRef.observe());
+  const chapters = useObservable(() => bookRef.chapters.observe());
+  const links = useMemo(() => [...new Set(chapters?.map(chapter => chapter.downloadURL.replace(/^"|"$/g, '')))], [chapters]);
+  const downloads = Downloads.useContainer();
+  const tasks = useMemo(() => [...downloads.tasks.filter((task, url) => links.includes(url)).values()], [links, downloads.tasks]);
+  const files = useObservable(() => bookRef.files.observe());
+  const wholeSize = (files && files.length > 0) ? files.map(file => file.remoteSize ?? 0).reduce(sum) : 0;
+  const { currentState: { book: currentBook }, dataSource: { state: playbackState }, methods: { toggle: _toggle, openBook } } = Playback.useContainer();
+  const readyFiles = useAsyncMemo(async () => {
+    if (!files) { return []; }
     try {
-      if (Platform.OS == "android") {
-        const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
-        return prettyBytes(files.map(file => parseInt(file.size)).reduce((acc, val) => acc + val));
-      }
+      const storagePath = RNBackgroundDownloader.directories.documents;
+      const filesAtSD = await RNFS.readDir(`${storagePath}/${book?.id}`);
+      return filesAtSD.filter(file => files.find(_file => file.path.includes(_file.path))?.remoteSize?.toString() == file.size);
     } catch (e) {
+      return [];
     }
-  }, [links], 'Calculating size');
+  }, [tasks, files], []);
+  const isActive = book != null && currentBook?.id == book.id;
 
-  useAsyncEffect(async () => {
-    if (!book) {
-      return;
-    }
-    if (Platform.OS == "android") {
-      try {
-        const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
-        const taskIDs = links.map(link => JSON.stringify({book: book.id, chapter: link}));
-        const tasks = taskIDs.map(id => downloads.pending.get(id)).filter((task): task is DownloadTask => task != undefined);
-        if (files.length == links.length && tasks.length == 0) {
-          setState(State.Ready);
-        } else {
-          setState(State.NoCache);
+  const { stateType, state, transit, stateChanged } = useBookState({
+    Loading: {
+      awake: async () => {
+        if (!book || !files) { return; }
+        let cancelled = false;
+        stateChanged.toPromise().then(() => cancelled = true);
+        const pendingTasks = [...downloads.tasks.filter((task, url) => links.includes(url)).values()];
+        if (pendingTasks.length > 0 && !cancelled) { transit("Downloading"); return; }
+        if (isActive) {
+          transit("Playing");
+          return;
         }
-      } catch (e) {
-        console.warn(e);
-        setState(State.NoCache);
+        try {
+          console.log('Searching files');
+          const storagePath = RNBackgroundDownloader.directories.documents;
+          const filesAtSD = await RNFS.readDir(`${storagePath}/${book?.id}`);
+          if (cancelled) { return; }
+          if (filesAtSD.length == files?.length && filesAtSD.every(file => files.find(_file => file.path.includes(_file.path))?.remoteSize?.toString() == file.size)) {
+            transit("Ready");
+            return;
+          } else {
+            transit("NoCache");
+          }
+        } catch (e) {
+          transit("NoCache");
+        }
       }
-    }
-  }, [book, chapters]);
+    },
+    NoCache: {
+      download: async () => {
+        if (!book || !files) {
+          return;
+        }
+        transit("Downloading");
+        const responses: (DownloadTask | Failed | undefined)[] = [];
+        for (let file of files) {
+          responses.push(await downloads.push(file.url, {
+            path: file.path, payload: {
+              bookID: book.id,
+            },
+          }));
+        }
+        console.log(responses);
+        const failed = responses.find(response => response != null && response in Failed) as Failed;
+        if (failed) {
+          console.warn(failed);
+          Toast.show({
+            type: "danger",
+            text: failed,
+          })
+        }
+      }
+    },
+    Ready: {
+      load: () => transit("Playing"),
+      clear: () => clearCache(),
+    },
+    Downloading: {
+      clear: () => clearCache(),
+    },
+    Playing: {
+      awake: () => { book && openBook(book); },
+      toggle: () => _toggle(),
+      clear: () => clearCache(),
+    },
+    Clearing: {
 
-  useAsyncEffect(async () => {
-    if (!book || !chapters || state == State.Downloading) {
-      return;
+    },
+    Destroying: {
+
+    },
+  }, "Loading");
+  useEffect(() => transit("Loading"), [files, tasks]);
+  useEffect(() => { !isActive && stateType == "Playing" && transit("Ready"); }, [isActive]);
+
+  const progressSource = useMemo(() => tasks.length > 0 ? combineLatest(tasks.map(task => task.State.pipe(map(value => value.percent)).pipe(startWith(0)))) : null, [tasks]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const subscription = progressSource?.subscribe(values => {
+      if (tasks.length > 0) {
+        setProgress((values.reduce(sum) + readyFiles.length) / (files?.length ?? 1));
+      } else {
+        progress != 0 && setProgress(0);
+      }
+    }, noop);
+    return () => {
+      subscription?.closed || subscription?.unsubscribe();
     }
-    const taskIDs = links.map(link => JSON.stringify({book: book.id, chapter: link}));
-    const tasks = taskIDs.map(id => downloads.pending.get(id)).filter((task): task is DownloadTask => task != undefined);
-    const remaining = links.length - tasks.length;
-    if (tasks.length > 0) {
-      Toast.show({
-        text: 'Resuming download',
-      });
-      setState(State.Downloading);
-      console.log('Resuming download');
-      await asyncForEach(tasks, async (task, index) => {
-        await new Promise((resolve, reject) => {
-          task
-            .progress(value => {
-              setProgress((index + value) / remaining);
-            })
-            .done(resolve)
-            .error(reject)
-            .begin(() => Toast.show({
-              text: `Download started: ${task.id}`,
-            }))
-            .resume();
-        });
-      });
-      setState(State.Ready);
-    }
-  }, [book, chapters, downloads.pending]);
+  }, [tasks]);
+
+  const database = useDatabase();
+  const {show: showActionSheet} = useActionSheet();
 
   const destroy = async () => {
     await clearCache();
-    setState(State.Destroying);
     database.action(async () => {
-      await asyncForEach(chapters ?? [], async chapter => {
+      await syncForEach(chapters ?? [], async chapter => {
         await chapter.destroyPermanently();
       });
       await book?.destroyPermanently();
@@ -157,143 +218,88 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
     if (!book || !chapters) {
       return;
     }
-    setState(State.DeletingCache);
-    const taskIDs = links.map(link => JSON.stringify({book: book.id, chapter: link}));
-    const tasks = taskIDs.map(id => downloads.pending.get(id)).filter((task): task is DownloadTask => task != undefined);
+    transit("Clearing");
     tasks.forEach(task => task.stop());
     try {
-      switch (Platform.OS) {
-        case "ios":
-        case "android": {
-          const files = await RNFS.readDir(`${RNBackgroundDownloader.directories.documents}/${book.id}`);
-          await asyncForEach(files, async file => await RNFS.unlink(file.path));
-          break;
-        }
-      }
+      const storagePath = RNBackgroundDownloader.directories.documents;
+      const files = await RNFS.readDir(`${storagePath}/${book.id}`);
+      await syncForEach(files, async file => await RNFS.unlink(file.path));
     } catch (e) {
       console.warn(e);
     }
     Toast.show({
       text: 'Cache successfully cleared',
     });
-    setState(State.NoCache);
+    transit("NoCache");
   };
 
-  const download = useCallback(async () => {
-    if (!book || !chapters || state == State.Downloading) {
-      return;
-    }
-    setState(State.Downloading);
-    console.log('Download start', links);
-    const tasks = links.map<[DownloadTask, string]>((link, index) => {
-      const extension = link.slice(link.lastIndexOf('.')).length > 5 ? undefined : link.slice(link.lastIndexOf('.')).replace('\"', '');
-      const config = {
-        id: JSON.stringify({book: book.id, chapter: link}),
-        url: link.replace(/^"|"$/g, ''),//.substring(1, file.length - 1),
-        destination: `${RNBackgroundDownloader.directories.documents}/${book.id}/${index}${extension}`
-      };
-      const download = RNBackgroundDownloader.download(config);
-      download.pause();
-      return [download, link];
-    });
+  const history = useHistory();
 
-    await asyncForEach(tasks, async ([task, link], index) => {
-      try {
-        const extension = link.slice(link.lastIndexOf('.')).length > 5 ? undefined : link.slice(link.lastIndexOf('.')).replace('\"', '');
-        let fileExists = false;
-        if (Platform.OS == "android") {
-          try {
-            const file = await RNFS.readFile(`${RNBackgroundDownloader.directories.documents}/${book.id}/${index}${extension}`);
-            if (file.length > 0) {
-              fileExists = true;
-            }
-          } catch (e) {
-            console.warn(e);
-          }
-        }
-        if (!fileExists) {
-          await new Promise((resolve, reject) => {
-            task
-              .progress(value => {
-                setProgress((index + value) / links.length);
-              })
-              .done(resolve)
-              .error((error, errorCode) => {
-                if (Platform.OS == "android") {
-                  RNFS.unlink(`${RNBackgroundDownloader.directories.documents}/${book.id}/${index}${extension}`).then(() => {
-                    reject({error, errorCode});
-                  }).catch((unlinkFailed) => {
-                    reject({error, errorCode, unlinkFailed});
-                  });
-                }
-              })
-              .resume();
-          });
-        } else if (downloads.pending.get(task.id)) {
-          const pendingTask = downloads.pending.get(task.id);
-          task.stop();
-          if (pendingTask) {
-            await new Promise((resolve, reject) => {
-              pendingTask
-                .progress(value => {
-                  setProgress((index + value) / links.length);
-                })
-                .done(resolve)
-                .error(reject)
-                .resume();
-            });
-          } else {
-            console.log('File alredy exists')
-          }
-        }
-      } catch (e) {
-        Toast.show({
-          text: JSON.stringify(e),
-          type: "danger",
-        });
-      }
-    });
-    setState(State.Ready);
-  }, [book, chapters, progress]);
-
-  const Control = ((state) => {
-    switch (state) {
-      case State.NoCache:
-        return <CircleButton onPress={download}>
-          <Icon type="FontAwesome5" name="arrow-down" style={{fontSize: 12}}/>
+  const Control = ((stateType) => {
+    switch (stateType) {
+      case "NoCache":
+        return <CircleButton size={49} onPress={state.download}>
+          <FeatherIcon name="arrow-down" />
         </CircleButton>;
-      case State.Loading:
-        return <Progress.Circle size={40} progress={progress} indeterminate={false}/>;
-      case State.DeletingCache:
-        return <Progress.Circle size={40} indeterminate color="red">
-          <Icon type="FontAwesome5" name="trash" style={{fontSize: 12}}/>
+      case "Loading":
+        return <Progress.Circle size={49} indeterminate/>;
+      case "Clearing":
+        return <Progress.Circle size={49} indeterminate color="red">
+          <FeatherIcon name="trash" />
         </Progress.Circle>;
-      case State.Destroying:
-        return <Progress.Circle size={40} indeterminate color="red">
-          <Icon type="FontAwesome5" name="close" style={{fontSize: 12}}/>
+      case "Destroying":
+        return <Progress.Circle size={49} indeterminate color="red">
+          <FeatherIcon name="close" />
         </Progress.Circle>;
-      case State.Downloading:
-        return <Progress.Circle size={40} progress={progress} indeterminate={progress == 0}/>
-      case State.Paused:
-      case State.Playing:
-      case State.Ready:
-        return book && <PlaybackButton book={book}/>
+      case "Downloading":
+        return <Progress.Circle size={49} progress={progress} indeterminate={progress == 0}/>
+      case "Playing":
+        return <CircleButton size={49} onPress={state.toggle} style={{ borderColor: isActive ? 'white' : undefined}}>
+          <FeatherIcon name={playbackState == PlayerState.Playing && isActive ? 'pause' : 'play'} style={{ color: isActive ? 'white' : undefined }} />
+        </CircleButton>;
+      case "Ready":
+        // return book && <PlaybackButton book={book}/>
+        return <CircleButton size={49} onPress={state.load} style={{ borderColor: isActive ? 'white' : undefined}}>
+          <FeatherIcon name={'play'} style={{ color: isActive ? 'white' : undefined }} />
+        </CircleButton>;
     }
-  })(state);
+  })(stateType);
 
   const time = (chapters?.length ?? 0) > 0 && (chapters?.map(chapter => chapter.duration).reduce((acc, val) => acc + val ?? 0) ?? 0) || 0;
 
-  return <Container>
-    <Thumb source={{uri: book?.thumbnail}}/>
-    <Meta>
-      <Title>{book?.title ?? 'undefined'}</Title>
-      <Subtitle>{book?.author}</Subtitle>
-      <Subtitle>{size}</Subtitle>
-      <Subtitle>{prettyTime(time)} | {chapters?.length} chapters</Subtitle>
-    </Meta>
-    <Right style={{flexDirection: 'row',}}>
-      {Control}
-      <Button dark transparent iconLeft onPress={() => {
+  return <TouchableOpacity onPress={() => history.push(`${book?.id}/chapters`)} onLongPress={() => {
+    showActionSheet({
+      actions: [
+        {
+          text: 'test',
+          icon: 'save',
+          callback: () => console.log('Test'),
+        }
+      ],
+      destructive: [
+        {
+          text: 'Delete',
+          icon: 'delete',
+          callback: destroy,
+        },
+        {
+          text: 'Clear Cache',
+          icon: 'close',
+          callback: state.clear,
+        },
+      ],
+    });
+  }}>
+    <Container style={{backgroundColor: isActive ? Colors.accent : 'transparent', borderRadius: 12 }}>
+      <Thumb source={{uri: book?.thumbnail}}/>
+      <Meta>
+        <Title    inverted={isActive} numberOfLines={1}>{book?.title ?? 'undefined'}</Title>
+        <Subtitle inverted={isActive} numberOfLines={1}>{book?.author}</Subtitle>
+        <Subtitle inverted={isActive} numberOfLines={1}>{prettyTime(time)}</Subtitle>
+      </Meta>
+      <Right style={{ flexDirection: 'row', marginRight: 8 }}>
+        { Control }
+        {/*<Button transparent iconLeft onPress={() => {
         showActionSheet({
           actions: [
             {
@@ -311,16 +317,18 @@ export const BookCard: React.FC<{ _book: Book }> = ({_book}) => {
             {
               text: 'Clear Cache',
               icon: 'close',
-              callback: clearCache,
+              callback: state.clear,
             },
           ],
         });
       }} style={{
-        justifyContent: 'center', alignItems: 'center', height: 40,
-        width: 40
+        justifyContent: 'center', alignItems: 'center',
+        height: 48,
+        width: 40,
       }}>
-        <Icon type="Entypo" name="dots-two-vertical" style={{fontSize: 18}}/>
-      </Button>
-    </Right>
-  </Container>;
+        <Icon type="Entypo" name="dots-two-vertical" style={{fontSize: 18, color: isActive ? 'white' : undefined}}/>
+      </Button>*/}
+      </Right>
+    </Container>
+  </TouchableOpacity>;
 };
