@@ -1,0 +1,6 @@
+[submodule "vendor/koin"]
+	path = vendor/koin
+	url = git@github.com:pbissonho/koin.dart.git
+[submodule "vendor/sounds"]
+	path = vendor/sounds
+	url = git@github.com:riih/sounds

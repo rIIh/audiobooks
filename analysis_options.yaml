@@ -1,0 +1,17 @@
+include: package:effective_dart/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.chopper.dart"
+    - "**/*.freezed.dart"
+    - "**/*.g.dart"
+
+  errors:
+    todo: ignore
+    lines_longer_than_80_chars: false
+    avoid_types_on_closure_parameters: false
+    public_member_api_docs: false
+
+  strong-mode:
+    implicit-casts: true
+    implicit-dynamic: true
