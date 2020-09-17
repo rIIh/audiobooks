@@ -1,4 +1,4 @@
-import 'package:audiobooks_flutter/model/internal/database.dart';
+import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:audiobooks_flutter/state/player_state.dart';
 import 'package:bloc/bloc.dart';
 

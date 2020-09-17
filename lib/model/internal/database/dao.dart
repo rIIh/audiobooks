@@ -1,6 +1,6 @@
-import 'package:audiobooks_flutter/model/internal/database.dart';
 import 'package:moor/moor.dart';
 
+import 'database.dart';
 import 'tables.dart';
 
 part 'dao.g.dart';

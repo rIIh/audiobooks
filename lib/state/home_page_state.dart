@@ -1,4 +1,4 @@
-import 'package:audiobooks_flutter/model/internal/database.dart';
+import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'home_page_state.freezed.dart';

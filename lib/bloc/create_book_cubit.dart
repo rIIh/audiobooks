@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:koin/koin.dart';
 import 'package:moor/moor.dart';
 
-import '../model/internal/dao.dart';
-import '../model/internal/database.dart';
+import '../model/internal/database/dao.dart';
 import '../service/book_parser_service.dart';
 import '../state/create_book_state.dart';
 import '../utils/value.dart';

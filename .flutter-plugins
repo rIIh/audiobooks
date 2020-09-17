@@ -1,8 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-device_info=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+7/
-flutter_inappwebview=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-4.0.0+4/
-path_provider=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.14/
-path_provider_linux=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
-path_provider_macos=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3/
-sqlite3_flutter_libs=/home/melv/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqlite3_flutter_libs-0.2.0/
-sounds=/home/melv/code/audiobooks/vendor/sounds/
+audiocutter=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/audiocutter-0.0.9/
+device_info=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+7/
+flutter_ffmpeg=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/flutter_ffmpeg-0.2.10/
+flutter_inappwebview=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-4.0.0+4/
+path_provider=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.14/
+path_provider_linux=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
+path_provider_macos=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3/
+sqlite3_flutter_libs=/Users/ratiih/.pub-cache/hosted/pub.dartlang.org/sqlite3_flutter_libs-0.2.0/
+sounds=/Users/ratiih/code/audiobooks/vendor/sounds/

@@ -1,6 +1,5 @@
+import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../model/internal/database.dart';
 
 part 'create_book_state.freezed.dart';
 

@@ -1,11 +1,12 @@
-import 'package:audiobooks_flutter/bloc/player_cubit.dart';
-import 'package:audiobooks_flutter/model/internal/database.dart';
-import 'package:audiobooks_flutter/state/player_state.dart';
-import 'package:audiobooks_flutter/widgets/fragments/book_card.dart';
-import 'package:audiobooks_flutter/text/Caption.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/player_cubit.dart';
+import '../../model/internal/database/database.dart';
+import '../../state/player_state.dart';
+import '../../text/Caption.dart';
+import 'book_card.dart';
 
 class BookTile extends StatelessWidget {
   final bool active;
