@@ -11,3 +11,7 @@ doc/api/
 
 # Mac
 .DS_Store
+
+**/*.*.dart
+
+.flutter-plugins-dependencies
