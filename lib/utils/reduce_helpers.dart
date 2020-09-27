@@ -1,0 +1,1 @@
+T sum<T extends num, Duration>(T a, T b) => a + b;

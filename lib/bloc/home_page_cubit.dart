@@ -1,4 +1,4 @@
-import 'package:audiobooks_flutter/model/internal/dao.dart';
+import 'package:audiobooks_flutter/model/internal/database/dao.dart';
 import 'package:audiobooks_flutter/state/home_page_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:koin/koin.dart';

@@ -5,6 +5,7 @@ analyzer:
     - "**/*.chopper.dart"
     - "**/*.freezed.dart"
     - "**/*.g.dart"
+    - "vendor/**/*.*"
 
   errors:
     todo: ignore

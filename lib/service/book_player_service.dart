@@ -1,4 +1,4 @@
-import 'package:audiobooks_flutter/model/internal/database.dart';
+import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:audiobooks_flutter/service/player_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:koin_flutter/koin_disposable.dart';

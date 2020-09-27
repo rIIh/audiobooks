@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -168,14 +169,26 @@ class _CreateBookSheetState extends State<CreateBookSheet> with ScopeStateMixin,
                     ),
                     Row(
                       children: [
-                        if (value.bookCandidate.thumbnail?.present == true)
+                        if (value.bookCandidate.thumbnail != null)
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.memory(
-                              value.bookCandidate.thumbnail.value,
-                              fit: BoxFit.cover,
-                              height: 66,
-                              width: 66,
+                            child: Stack(
+                              children: [
+                                ImageFiltered(
+                                  imageFilter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+                                  child: Image.network(
+                                    value.bookCandidate.thumbnail,
+                                    height: 66,
+                                    fit: BoxFit.cover,
+                                    width: 66,
+                                  ),
+                                ),
+                                Image.network(
+                                  value.bookCandidate.thumbnail,
+                                  height: 66,
+                                  width: 66,
+                                ),
+                              ]
                             ),
                           ),
                         const SizedBox(
@@ -187,7 +200,7 @@ class _CreateBookSheetState extends State<CreateBookSheet> with ScopeStateMixin,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                value.bookCandidate.title?.value ?? 'Title',
+                                value.bookCandidate.title ?? 'Title',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -197,7 +210,7 @@ class _CreateBookSheetState extends State<CreateBookSheet> with ScopeStateMixin,
                               ),
                               SizedBox(height: 4),
                               Text(
-                                value.bookCandidate.author?.value ?? 'Author',
+                                value.bookCandidate.author ?? 'Author',
                                 style: TextStyle(
                                   color: Color(0x99000000),
                                   fontSize: 14,
@@ -207,7 +220,7 @@ class _CreateBookSheetState extends State<CreateBookSheet> with ScopeStateMixin,
                               ),
                               SizedBox(height: 4),
                               Text(
-                                value.bookCandidate.duration?.value.toString() ?? 'Duration',
+                                value.bookCandidate.duration?.toString() ?? 'Duration',
                                 style: TextStyle(
                                   color: Color(0x99000000),
                                   fontSize: 14,
@@ -235,13 +248,8 @@ class _CreateBookSheetState extends State<CreateBookSheet> with ScopeStateMixin,
                       height: 16,
                     ),
                     DurationBar(
-                      durations: List.generate(
-                        15,
-                        (index) => Duration(
-                          seconds: Random().nextInt(100) + 1,
-                        ),
-                      ),
-                      spacing: 3,
+                      durations: value.bookCandidate.chapters.map((e) => e.duration).map(parseHHMMSS).toList(),
+                      spacing: 1.5,
                       light: grey.withOpacity(0.5),
                     )
                   ],
