@@ -9,7 +9,7 @@ class Books extends Table {
 
   BlobColumn get thumbnail => blob().nullable()();
 
-  IntColumn get duration => integer().map(DurationConverter())();
+  TextColumn get origin => text().nullable()();
 }
 
 class Chapters extends Table {
@@ -19,9 +19,27 @@ class Chapters extends Table {
 
   IntColumn get duration => integer().map(DurationConverter())();
 
-  TextColumn get record => text().nullable()();
+  TextColumn get remote => text().nullable()();
 
   IntColumn get bookId => integer().customConstraint('REFERENCES books(id)')();
+}
+
+class Caches extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get chapterId => integer().customConstraint('REFERENCES chapters(id)')();
+
+  TextColumn get path => text()();
+
+  TextColumn get md5 => text()();
+}
+
+@DataClassName('DownloadCacheEntry')
+class DownloadCacheEntries extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get bookId => integer().customConstraint('REFERENCES books(id)')();
+  TextColumn get taskId => text().customConstraint('UNIQUE')();
 }
 
 class DurationConverter extends TypeConverter<Duration, int> {
@@ -43,3 +61,4 @@ class DurationConverter extends TypeConverter<Duration, int> {
     return value.inSeconds;
   }
 }
+

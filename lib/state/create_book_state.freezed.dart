@@ -30,7 +30,7 @@ class _$CreateBookStateTearOff {
   }
 
 // ignore: unused_element
-  _Loaded loaded(BooksCompanion bookCandidate) {
+  _Loaded loaded(ParsedBook bookCandidate) {
     return _Loaded(
       bookCandidate,
     );
@@ -51,7 +51,7 @@ mixin _$CreateBookState {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   });
   @optionalTypeArgs
@@ -59,7 +59,7 @@ mixin _$CreateBookState {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   });
@@ -133,7 +133,7 @@ class _$_Waiting implements _Waiting {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   }) {
     assert(waiting != null);
@@ -150,7 +150,7 @@ class _$_Waiting implements _Waiting {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   }) {
@@ -257,7 +257,7 @@ class _$_HasInput implements _HasInput {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   }) {
     assert(waiting != null);
@@ -274,7 +274,7 @@ class _$_HasInput implements _HasInput {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   }) {
@@ -363,7 +363,7 @@ class _$_Loading implements _Loading {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   }) {
     assert(waiting != null);
@@ -380,7 +380,7 @@ class _$_Loading implements _Loading {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   }) {
@@ -433,7 +433,9 @@ abstract class _Loading implements CreateBookState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({BooksCompanion bookCandidate});
+  $Res call({ParsedBook bookCandidate});
+
+  $ParsedBookCopyWith<$Res> get bookCandidate;
 }
 
 class __$LoadedCopyWithImpl<$Res> extends _$CreateBookStateCopyWithImpl<$Res>
@@ -451,8 +453,18 @@ class __$LoadedCopyWithImpl<$Res> extends _$CreateBookStateCopyWithImpl<$Res>
     return _then(_Loaded(
       bookCandidate == freezed
           ? _value.bookCandidate
-          : bookCandidate as BooksCompanion,
+          : bookCandidate as ParsedBook,
     ));
+  }
+
+  @override
+  $ParsedBookCopyWith<$Res> get bookCandidate {
+    if (_value.bookCandidate == null) {
+      return null;
+    }
+    return $ParsedBookCopyWith<$Res>(_value.bookCandidate, (value) {
+      return _then(_value.copyWith(bookCandidate: value));
+    });
   }
 }
 
@@ -460,7 +472,7 @@ class _$_Loaded implements _Loaded {
   const _$_Loaded(this.bookCandidate) : assert(bookCandidate != null);
 
   @override
-  final BooksCompanion bookCandidate;
+  final ParsedBook bookCandidate;
 
   @override
   String toString() {
@@ -490,7 +502,7 @@ class _$_Loaded implements _Loaded {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   }) {
     assert(waiting != null);
@@ -507,7 +519,7 @@ class _$_Loaded implements _Loaded {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   }) {
@@ -554,9 +566,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements CreateBookState {
-  const factory _Loaded(BooksCompanion bookCandidate) = _$_Loaded;
+  const factory _Loaded(ParsedBook bookCandidate) = _$_Loaded;
 
-  BooksCompanion get bookCandidate;
+  ParsedBook get bookCandidate;
   _$LoadedCopyWith<_Loaded> get copyWith;
 }
 
@@ -596,7 +608,7 @@ class _$_Created implements _Created {
     @required Result waiting(),
     @required Result hasInput(String input),
     @required Result loading(),
-    @required Result loaded(BooksCompanion bookCandidate),
+    @required Result loaded(ParsedBook bookCandidate),
     @required Result created(),
   }) {
     assert(waiting != null);
@@ -613,7 +625,7 @@ class _$_Created implements _Created {
     Result waiting(),
     Result hasInput(String input),
     Result loading(),
-    Result loaded(BooksCompanion bookCandidate),
+    Result loaded(ParsedBook bookCandidate),
     Result created(),
     @required Result orElse(),
   }) {

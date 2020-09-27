@@ -115,7 +115,7 @@ class __$ParsedBookCopyWithImpl<$Res> extends _$ParsedBookCopyWithImpl<$Res>
 
 @JsonSerializable()
 class _$_ParsedBook implements _ParsedBook {
-  const _$_ParsedBook(this.title, this.author, this.thumbnail, this.chapters)
+  _$_ParsedBook(this.title, this.author, this.thumbnail, this.chapters)
       : assert(title != null),
         assert(author != null),
         assert(thumbnail != null),
@@ -133,9 +133,23 @@ class _$_ParsedBook implements _ParsedBook {
   @override
   final List<ParsedChapter> chapters;
 
+  bool _didduration = false;
+  Duration _duration;
+
+  @override
+  Duration get duration {
+    if (_didduration == false) {
+      _didduration = true;
+      _duration = chapters.map((e) => e.duration).map(parseHHMMSS).reduce(
+            (value, element) => value + element,
+          );
+    }
+    return _duration;
+  }
+
   @override
   String toString() {
-    return 'ParsedBook(title: $title, author: $author, thumbnail: $thumbnail, chapters: $chapters)';
+    return 'ParsedBook(title: $title, author: $author, thumbnail: $thumbnail, chapters: $chapters, duration: $duration)';
   }
 
   @override
@@ -173,7 +187,7 @@ class _$_ParsedBook implements _ParsedBook {
 }
 
 abstract class _ParsedBook implements ParsedBook {
-  const factory _ParsedBook(String title, String author, String thumbnail,
+  factory _ParsedBook(String title, String author, String thumbnail,
       List<ParsedChapter> chapters) = _$_ParsedBook;
 
   factory _ParsedBook.fromJson(Map<String, dynamic> json) =

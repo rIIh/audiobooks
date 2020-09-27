@@ -1,4 +1,5 @@
 import 'package:audiobooks_flutter/model/internal/database/database.dart';
+import 'package:audiobooks_flutter/service/downloading/downloader.dart';
 import 'package:audiobooks_flutter/service/parsing_strategy_resolver.dart';
 import 'package:koin/koin.dart';
 import 'package:koin_bloc/koin_bloc.dart';
@@ -16,7 +17,8 @@ final mainModule = module()
   ..scope<CreateBookSheet>((dsl) => dsl..scopedCubit((scope) => CreateBookCubit()))
   ..single((scope) => Database())
   ..single((scope) => BooksDao(scope.get()))
-  ..single((scope) => BookLoaderService());
+  ..single((scope) => BookLoaderService())
+  ..single((scope) => Downloader());
 
 final strategies = module()
   ..scope<LoadingStrategyResolver>(

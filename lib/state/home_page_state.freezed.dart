@@ -18,7 +18,7 @@ class _$HomePageStateTearOff {
   }
 
 // ignore: unused_element
-  _Loaded loaded(List<Book> books) {
+  _Loaded loaded(List<BookWithChapters> books) {
     return _Loaded(
       books,
     );
@@ -32,12 +32,12 @@ mixin _$HomePageState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result loading(),
-    @required Result loaded(List<Book> books),
+    @required Result loaded(List<BookWithChapters> books),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result loading(),
-    Result loaded(List<Book> books),
+    Result loaded(List<BookWithChapters> books),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -102,7 +102,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result loading(),
-    @required Result loaded(List<Book> books),
+    @required Result loaded(List<BookWithChapters> books),
   }) {
     assert(loading != null);
     assert(loaded != null);
@@ -113,7 +113,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result loading(),
-    Result loaded(List<Book> books),
+    Result loaded(List<BookWithChapters> books),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -156,7 +156,7 @@ abstract class _Loading implements HomePageState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Book> books});
+  $Res call({List<BookWithChapters> books});
 }
 
 class __$LoadedCopyWithImpl<$Res> extends _$HomePageStateCopyWithImpl<$Res>
@@ -172,7 +172,7 @@ class __$LoadedCopyWithImpl<$Res> extends _$HomePageStateCopyWithImpl<$Res>
     Object books = freezed,
   }) {
     return _then(_Loaded(
-      books == freezed ? _value.books : books as List<Book>,
+      books == freezed ? _value.books : books as List<BookWithChapters>,
     ));
   }
 }
@@ -181,7 +181,7 @@ class _$_Loaded implements _Loaded {
   const _$_Loaded(this.books) : assert(books != null);
 
   @override
-  final List<Book> books;
+  final List<BookWithChapters> books;
 
   @override
   String toString() {
@@ -208,7 +208,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result loading(),
-    @required Result loaded(List<Book> books),
+    @required Result loaded(List<BookWithChapters> books),
   }) {
     assert(loading != null);
     assert(loaded != null);
@@ -219,7 +219,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result loading(),
-    Result loaded(List<Book> books),
+    Result loaded(List<BookWithChapters> books),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -256,8 +256,8 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements HomePageState {
-  const factory _Loaded(List<Book> books) = _$_Loaded;
+  const factory _Loaded(List<BookWithChapters> books) = _$_Loaded;
 
-  List<Book> get books;
+  List<BookWithChapters> get books;
   _$LoadedCopyWith<_Loaded> get copyWith;
 }

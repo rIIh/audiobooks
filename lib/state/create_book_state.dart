@@ -1,4 +1,5 @@
 import 'package:audiobooks_flutter/model/internal/database/database.dart';
+import 'package:audiobooks_flutter/model/remote/parsed_book.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_book_state.freezed.dart';
@@ -11,7 +12,9 @@ abstract class CreateBookState with _$CreateBookState {
 
   const factory CreateBookState.loading() = _Loading;
 
-  const factory CreateBookState.loaded(BooksCompanion bookCandidate) = _Loaded;
+  const factory CreateBookState.loaded(
+    ParsedBook bookCandidate,
+  ) = _Loaded;
 
   const factory CreateBookState.created() = _Created;
 }

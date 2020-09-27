@@ -1,15 +1,11 @@
 import 'dart:async';
 
-import 'package:audiobooks_flutter/model/internal/database/database.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:koin/koin.dart';
-import 'package:moor/moor.dart';
 
 import '../model/internal/database/dao.dart';
 import '../service/book_parser_service.dart';
 import '../state/create_book_state.dart';
-import '../utils/value.dart';
 
 Duration parseHHMMSS(String duration) {
   var values = duration.split(':'), seconds = 0, minutes = 1;
@@ -61,23 +57,7 @@ class CreateBookCubit extends Cubit<CreateBookState> with KoinComponentMixin {
           final result = await _loaderService.loadBook(value.input);
           emit(
             CreateBookState.loaded(
-              BooksCompanion(
-                title: result.title.toValue(),
-                author: result.author.toValue(),
-                duration: result.chapters
-                    .map((e) => e.duration)
-                    .map(parseHHMMSS)
-                    .reduce((value, element) => value + element)
-                    .toValue(),
-                thumbnail: Value(
-                  (await Dio().get(
-                    result.thumbnail,
-                    options: Options(responseType: ResponseType.bytes),
-                  ))
-                      .data,
-                ),
-                // thumbnail: (await Dio().get(result.thumbnail)).data.toValue(),
-              ),
+              result,
             ),
           );
         } on Exception {
@@ -93,6 +73,7 @@ class CreateBookCubit extends Cubit<CreateBookState> with KoinComponentMixin {
     state.maybeMap(
       loaded: (value) async {
         emit(CreateBookState.loading());
+        await _dao.saveBook(value.bookCandidate);
         Timer(
           Duration(seconds: 1),
           () => emit(

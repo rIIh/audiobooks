@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.2"
-  audiocutter:
-    dependency: "direct main"
-    description:
-      name: audiocutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.9"
   bloc:
     dependency: "direct main"
     description:
@@ -272,13 +265,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.5"
-  flutter_ffmpeg:
-    dependency: transitive
+  flutter_downloader:
+    dependency: "direct main"
     description:
-      name: flutter_ffmpeg
+      name: flutter_downloader
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.10"
+    version: "1.5.0"
   flutter_inappwebview:
     dependency: "direct main"
     description:
@@ -723,6 +716,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
+  tuple:
+    dependency: "direct main"
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   typed_data:
     dependency: transitive
     description:

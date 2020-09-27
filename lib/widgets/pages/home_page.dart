@@ -41,9 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with ScopeStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text('AudioBooks'),
-        actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: _showAddSheet)
-        ],
+        actions: [IconButton(icon: Icon(Icons.add), onPressed: _showAddSheet)],
       ),
       body: Container(
         child: Column(
@@ -55,20 +53,6 @@ class _MyHomePageState extends State<MyHomePage> with ScopeStateMixin {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    child: Text('Recent'),
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 146),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 14),
-                      itemBuilder: (context, index) => BookCard(
-                        height: 126,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     child: BlocBuilder(
                       cubit: _homePageCubit,
                       builder: (context, HomePageState state) => state.map(
@@ -76,11 +60,15 @@ class _MyHomePageState extends State<MyHomePage> with ScopeStateMixin {
                           child: CircularProgressIndicator(),
                         ),
                         loaded: (value) => Column(
-                          children: value.books.map(
+                          children: value.books
+                              .map(
                                 (book) => BookTile(
-                              book: book,
-                            ),
-                          ).toList(),
+                                  data: book,
+                                  dao: get(),
+                                  playerCubit: _playerCubit,
+                                ),
+                              )
+                              .toList(),
                         ),
                       ),
                     ),
